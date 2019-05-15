@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './assets/logo.svg';
 import './App.css';
-import MenuAppBar from './components/MenuAppBar/MenuAppBar';
+import DrawerMenu from './components/DrawerMenu/DrawerMenu';
 function App() {
   return (
     <div className="App">
-        <MenuAppBar/>
+        <DrawerMenu/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
