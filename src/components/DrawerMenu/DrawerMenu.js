@@ -10,8 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -90,7 +88,11 @@ const styles = theme => ({
     right: '20px',
     float: 'right',
     position: 'fixed',
-}
+},
+  appTitle: {
+    margin: "0 20px", 
+    overflowX: "clip",
+  }
 });
 
 class DrawerMenu extends React.Component {
@@ -113,8 +115,12 @@ class DrawerMenu extends React.Component {
   handleCloseAuthMenu = () => {
     this.setState({ anchorEl: null });
   };
+  handleLogOff =  () => {
+    this.setState({ anchorEl: null });
+    alert('Loged off');
+  } 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
@@ -123,21 +129,18 @@ class DrawerMenu extends React.Component {
         <AppBar
           position="fixed"
           className={classNames(classes.appBar, {
-            [classes.appBarShift]: this.state.open,
           })}
         >
-          <Toolbar disableGutters={!this.state.open}>
+          <Toolbar >
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, {
-                [classes.hide]: this.state.open,
-              })}
+              onClick={this.state.open ? this.handleDrawerClose : this.handleDrawerOpen}
+              className={classNames(classes.menuButton)}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography className= {classes.appTitle} variant="h6" color="inherit" noWrap>
               Debt payer
             </Typography>
             <div className = {classNames(classes.authMenu)} >
@@ -156,15 +159,11 @@ class DrawerMenu extends React.Component {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
                 open={open}
                 onClose={this.handleCloseAuthMenu}
               >
                 <MenuItem onClick={this.handleCloseAuthMenu}>Profile</MenuItem>
-                <MenuItem onClick={this.handleCloseAuthMenu}>My account</MenuItem>
+                <MenuItem onClick={ this.handleLogOff}>Log out</MenuItem>
               </Menu>
             </div>
           </Toolbar>
@@ -184,9 +183,6 @@ class DrawerMenu extends React.Component {
           open={this.state.open}
         >
           <div className={classes.toolbar}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
           </div>
           <Divider />
           {/*TO-DO move next items of the drawer to the draweIcon*/}
