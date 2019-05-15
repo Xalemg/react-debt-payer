@@ -17,8 +17,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import drawerContent from './drawerContent/drawerContent';
-const drawerWidth = 240;
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+
+
+//import drawerContent from './drawerContent/drawerContent';
+const drawerWidth = 240; // Width of the opened drawer
+
+
 
 const styles = theme => ({
   root: {
@@ -38,10 +45,6 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36,
   },
   hide: {
     display: 'none',
@@ -80,11 +83,24 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
   },
+  grow: {
+    flexGrow: 1,
+  },
+  authMenu: {
+    right: '20px',
+    float: 'right',
+    position: 'fixed',
+}
 });
 
 class DrawerMenu extends React.Component {
   state = {
     open: false,
+    auth: true,
+    anchorEl: null,
+  };
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
   };
 
   handleDrawerOpen = () => {
@@ -94,10 +110,13 @@ class DrawerMenu extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
-
+  handleCloseAuthMenu = () => {
+    this.setState({ anchorEl: null });
+  };
   render() {
     const { classes, theme } = this.props;
-
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -119,8 +138,35 @@ class DrawerMenu extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
-              Mini variant drawer
+              Debt payer
             </Typography>
+            <div className = {classNames(classes.authMenu)} >
+              <IconButton
+                aria-owns={open ? 'menu-appbar' : undefined}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="inherit"
+              >
+              <AccountCircle/>
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={this.handleCloseAuthMenu}
+              >
+                <MenuItem onClick={this.handleCloseAuthMenu}>Profile</MenuItem>
+                <MenuItem onClick={this.handleCloseAuthMenu}>My account</MenuItem>
+              </Menu>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -164,7 +210,6 @@ class DrawerMenu extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          
         </main>
       </div>
     );
