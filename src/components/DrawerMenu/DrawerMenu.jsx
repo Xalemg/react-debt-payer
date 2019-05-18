@@ -18,99 +18,32 @@ import MailIcon from '@material-ui/icons/Mail';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
-
-//import drawerContent from './drawerContent/drawerContent';
-const drawerWidth = 240; // Width of the opened drawer
-
-
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing.unit * 7 + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9 + 1,
-    },
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  authMenu: {
-    right: '20px',
-    float: 'right',
-    position: 'fixed',
-},
-  appTitle: {
-    margin: "0 20px", 
-    overflowX: "clip",
-  }
-});
+import styles from "./styles";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import {connect} from 'react-redux'
 
 class DrawerMenu extends React.Component {
-  state = {
-    open: false,
-    auth: true,
-    anchorEl: null,
-  };
+  constructor( props) {
+    super (props);
+
+    this.state = {
+      openMenu: false,
+      anchorEl: null,
+    };
+  }
+  
+
+
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
+    this.setState({openMenu: true });
   };
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
+    this.setState({ openMenu: false });
   };
   handleCloseAuthMenu = () => {
     this.setState({ anchorEl: null });
@@ -119,10 +52,17 @@ class DrawerMenu extends React.Component {
     this.setState({ anchorEl: null });
     alert('Loged off');
   } 
+  handleLogIn =  () => {
+    this.setState({ anchorEl: null });
+    alert('Loged off');
+  } 
   render() {
+    const {user} = this.props;
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    console.log(user);
+    
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -135,10 +75,10 @@ class DrawerMenu extends React.Component {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.state.open ? this.handleDrawerClose : this.handleDrawerOpen}
+              onClick={this.state.openMenu ? this.handleDrawerClose : this.handleDrawerOpen}
               className={classNames(classes.menuButton)}
             >
-              <MenuIcon />
+               {!this.state.openMenu? <MenuIcon /> : <ChevronLeftIcon/>}
             </IconButton>
             <Typography className= {classes.appTitle} variant="h6" color="inherit" noWrap>
               Debt payer
@@ -171,21 +111,21 @@ class DrawerMenu extends React.Component {
         <Drawer
           variant="permanent"
           className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.open,
-            [classes.drawerClose]: !this.state.open,
+            [classes.drawerOpen]: this.state.openMenu,
+            [classes.drawerClose]: !this.state.openMenu,
           })}
           classes={{
             paper: classNames({
-              [classes.drawerOpen]: this.state.open,
-              [classes.drawerClose]: !this.state.open,
+              [classes.drawerOpen]: this.state.openMenu,
+              [classes.drawerClose]: !this.state.openMenu,
             }),
           }}
-          open={this.state.open}
+          open={this.state.openMenu}
         >
           <div className={classes.toolbar}>
           </div>
           <Divider />
-          {/*TO-DO move next items of the drawer to the draweIcon*/}
+          {/* TODO move next items of the drawer to the draweContent component*/}
           <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
               <ListItem button key={text}>
@@ -211,5 +151,11 @@ class DrawerMenu extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  }
+}
 
-export default withStyles(styles, { withTheme: true })(DrawerMenu)
+
+export default withStyles(styles, { withTheme: true })(connect(mapStateToProps)(DrawerMenu))
