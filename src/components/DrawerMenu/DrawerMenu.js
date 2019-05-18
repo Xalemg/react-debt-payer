@@ -18,82 +18,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import styles from "./styles";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-
-//import drawerContent from './drawerContent/drawerContent';
-const drawerWidth = 240; // Width of the opened drawer
-
-
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing.unit * 7 + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9 + 1,
-    },
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  authMenu: {
-    right: '20px',
-    float: 'right',
-    position: 'fixed',
-},
-  appTitle: {
-    margin: "0 20px", 
-    overflowX: "clip",
-  }
-});
 
 class DrawerMenu extends React.Component {
   state = {
@@ -138,7 +65,7 @@ class DrawerMenu extends React.Component {
               onClick={this.state.open ? this.handleDrawerClose : this.handleDrawerOpen}
               className={classNames(classes.menuButton)}
             >
-              <MenuIcon />
+               {!this.state.open? <MenuIcon /> : <ChevronLeftIcon/>}
             </IconButton>
             <Typography className= {classes.appTitle} variant="h6" color="inherit" noWrap>
               Debt payer
@@ -150,6 +77,7 @@ class DrawerMenu extends React.Component {
                 onClick={this.handleMenu}
                 color="inherit"
               >
+              {/* TODO Modify avatar for the right image */}
               <AccountCircle/>
               </IconButton>
               <Menu
@@ -185,7 +113,7 @@ class DrawerMenu extends React.Component {
           <div className={classes.toolbar}>
           </div>
           <Divider />
-          {/*TO-DO move next items of the drawer to the draweIcon*/}
+          {/* TODO move next items of the drawer to the draweIcon*/}
           <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
               <ListItem button key={text}>
