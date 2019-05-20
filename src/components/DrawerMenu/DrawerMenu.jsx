@@ -54,15 +54,15 @@ class DrawerMenu extends React.Component {
   } 
   handleLogIn =  () => {
     this.setState({ anchorEl: null });
-    alert('Loged off');
+    alert('Loged in');
   } 
   render() {
     const {user} = this.props;
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-    console.log(user);
-    
+    const login = checkLogin(user, this.handleCloseAuthMenu, this.handleLogOff, this.handleLogIn);
+
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -102,8 +102,7 @@ class DrawerMenu extends React.Component {
                 open={open}
                 onClose={this.handleCloseAuthMenu}
               >
-                <MenuItem onClick={this.handleCloseAuthMenu}>Profile</MenuItem>
-                <MenuItem onClick={ this.handleLogOff}>Log out</MenuItem>
+                {login}
               </Menu>
             </div>
           </Toolbar>
@@ -154,6 +153,15 @@ class DrawerMenu extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+  }
+}
+
+const checkLogin = (user, handleCloseAuthMenu, handleLogOff, handleLogIn) => {
+  if (user.id != null) {
+    return   <><MenuItem onClick={this.handleCloseAuthMenu}>Profile</MenuItem>
+    <MenuItem onClick={ handleLogOff}>Log out</MenuItem></>
+    }else {
+      return <MenuItem onClick={ handleLogIn}>Log in</MenuItem>
   }
 }
 
