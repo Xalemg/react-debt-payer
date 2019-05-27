@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {HomeIcon, SettingsIcon, Own, Owned} from '../Icons/Icons';
+import {HomeIcon, SettingsIcon, Own, Owned, Stats} from '../Icons/Icons';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -127,27 +127,31 @@ class DrawerMenu extends React.Component {
           {/* TODO move next items of the drawer to the draweContent component*/}
           <List>
           <ListItem button key={'Overview'}>
-            <ListItemIcon><HomeIcon/> </ListItemIcon>
-            <ListItemText primary='Overview' />
+              <ListItemIcon><HomeIcon/></ListItemIcon>
+              <ListItemText primary='Overview' />
           </ListItem>
           <ListItem button key={'Debts I own'}>
-            <ListItemIcon><Own/> </ListItemIcon>
-            <ListItemText primary='Debts I own'/>
+              <ListItemIcon><Own/></ListItemIcon>
+              <ListItemText primary='Debts I own'/>
           </ListItem>
           <ListItem button key={'Debts being Owned'}>
-            <ListItemIcon><Owned/> </ListItemIcon>
-            <ListItemText primary='Debts being Owned'/>
+              <ListItemIcon><Owned/></ListItemIcon>
+              <ListItemText primary='Debts being Owned'/>
+          </ListItem>
+          <ListItem button key={'Stats'}>
+              <ListItemIcon><Stats/></ListItemIcon>
+              <ListItemText primary='Stats' />
           </ListItem>
           </List>
           <Divider />
           <List>
           <ListItem button key={'Settings'}>
-            <ListItemIcon><SettingsIcon/></ListItemIcon>
-            <ListItemText primary='Settings' />
+              <ListItemIcon><SettingsIcon/></ListItemIcon>
+              <ListItemText primary='Settings' />
           </ListItem>
           <ListItem style={{display: "none"}} button key={'About this'}>
-            <ListItemIcon><MailIcon/> </ListItemIcon>
-            <ListItemText primary='About this'/>
+              <ListItemIcon><MailIcon/></ListItemIcon>
+              <ListItemText primary='About this'/>
           </ListItem>
           </List>
         </Drawer>
