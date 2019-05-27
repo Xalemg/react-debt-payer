@@ -10,10 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {HomeIcon, SettingsIcon, Own, Owned} from '../Icons/Icons';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -126,21 +126,29 @@ class DrawerMenu extends React.Component {
           <Divider />
           {/* TODO move next items of the drawer to the draweContent component*/}
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+          <ListItem button key={'Overview'}>
+            <ListItemIcon><HomeIcon/> </ListItemIcon>
+            <ListItemText primary='Overview' />
+          </ListItem>
+          <ListItem button key={'Debts I own'}>
+            <ListItemIcon><Own/> </ListItemIcon>
+            <ListItemText primary='Debts I own'/>
+          </ListItem>
+          <ListItem button key={'Debts being Owned'}>
+            <ListItemIcon><Owned/> </ListItemIcon>
+            <ListItemText primary='Debts being Owned'/>
+          </ListItem>
           </List>
           <Divider />
           <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+          <ListItem button key={'Settings'}>
+            <ListItemIcon><SettingsIcon/></ListItemIcon>
+            <ListItemText primary='Settings' />
+          </ListItem>
+          <ListItem style={{display: "none"}} button key={'About this'}>
+            <ListItemIcon><MailIcon/> </ListItemIcon>
+            <ListItemText primary='About this'/>
+          </ListItem>
           </List>
         </Drawer>
         <main className={classes.content}>
