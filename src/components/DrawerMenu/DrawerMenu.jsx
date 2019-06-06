@@ -21,6 +21,7 @@ import Menu from '@material-ui/core/Menu';
 import styles from "./styles";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {connect} from 'react-redux'
+import { Link } from "react-router-dom";
 
 class DrawerMenu extends React.Component {
   constructor( props) {
@@ -31,8 +32,6 @@ class DrawerMenu extends React.Component {
       anchorEl: null,
     };
   }
-  
-
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -41,7 +40,6 @@ class DrawerMenu extends React.Component {
   handleDrawerOpen = () => {
     this.setState({openMenu: true });
   };
-
   handleDrawerClose = () => {
     this.setState({ openMenu: false });
   };
@@ -53,16 +51,24 @@ class DrawerMenu extends React.Component {
     alert('Loged off');
   } 
   handleLogIn =  () => {
-    this.setState({ anchorEl: null });
+    this.setState({ anchorEl: null,
+    user: { id: 1}});
     alert('Loged in');
   } 
+
+  handleRouteChange =(path) => {
+     this.setState({path});
+      
+  }
+
   render() {
+
+
     const {user} = this.props;
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     const login = checkLogin(user, this.handleCloseAuthMenu, this.handleLogOff, this.handleLogIn);
-
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -126,33 +132,45 @@ class DrawerMenu extends React.Component {
           <Divider />
           {/* TODO move next items of the drawer to the draweContent component*/}
           <List>
+          <Link to = '/overview'  style = {{textDecoration: "none"}}>
           <ListItem button key={'Overview'}>
               <ListItemIcon><HomeIcon/></ListItemIcon>
               <ListItemText primary='Overview' />
           </ListItem>
+          </Link>
+          <Link to = '/own' style = {{textDecoration: "none"}}>
           <ListItem button key={'Debts I own'}>
               <ListItemIcon><Own/></ListItemIcon>
               <ListItemText primary='Debts I own'/>
           </ListItem>
+          </Link>  
+          <Link to = 'owned' style = {{textDecoration: "none"}}>
           <ListItem button key={'Debts being Owned'}>
               <ListItemIcon><Owned/></ListItemIcon>
               <ListItemText primary='Debts being Owned'/>
           </ListItem>
+          </Link>  
+          <Link to = 'stats' style = {{textDecoration: "none"}}>
           <ListItem button key={'Stats'}>
               <ListItemIcon><Stats/></ListItemIcon>
               <ListItemText primary='Stats' />
           </ListItem>
+          </Link>  
           </List>
           <Divider />
           <List>
-          <ListItem button key={'Settings'}>
-              <ListItemIcon><SettingsIcon/></ListItemIcon>
+          <Link to = 'settings' style = {{textDecoration: "none"}}>
+          <ListItem button key={'Settings'} >
+            <ListItemIcon><SettingsIcon/></ListItemIcon>
               <ListItemText primary='Settings' />
           </ListItem>
+          </Link>
+          <Link to = 'stats' style = {{textDecoration: "none"}}>
           <ListItem style={{display: "none"}} button key={'About this'}>
               <ListItemIcon><MailIcon/></ListItemIcon>
               <ListItemText primary='About this'/>
           </ListItem>
+          </Link>  
           </List>
         </Drawer>
         <main className={classes.content}>
@@ -173,7 +191,11 @@ const checkLogin = (user, handleCloseAuthMenu, handleLogOff, handleLogIn) => {
     return   <><MenuItem onClick={this.handleCloseAuthMenu}>Profile</MenuItem>
     <MenuItem onClick={ handleLogOff}>Log out</MenuItem></>
     }else {
-      return <MenuItem onClick={ handleLogIn}>Log in</MenuItem>
+      return (
+        <MenuItem onClick={ handleLogIn}>
+          <Link to = 'login' style = {{textDecoration: "none"}}>Log in</Link>
+        </MenuItem>
+      )
   }
 }
 

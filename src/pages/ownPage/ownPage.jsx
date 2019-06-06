@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 
-export class hello extends Component {
+export class ownPage extends Component {
 
 
   render() {
     return (
       <div>
-        Holaaaaa
+        ownPage
       </div>
     )
   }
 }
 
-export default hello
+export default ownPage
