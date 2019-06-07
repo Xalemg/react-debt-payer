@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {HomeIcon, SettingsIcon, Own, Owned, Stats} from '../Icons/Icons';
+import {HomeIcon, SettingsIcon, Own, Owned, Stats} from '../../assets/Icons/Icons';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -50,21 +50,11 @@ class DrawerMenu extends React.Component {
     this.setState({ anchorEl: null });
     alert('Loged off');
   } 
-  handleLogIn =  () => {
-    this.setState({ anchorEl: null,
-    user: { id: 1}});
-    alert('Loged in');
-  } 
-
-  handleRouteChange =(path) => {
-     this.setState({path});
-      
-  }
 
   render() {
 
 
-    const {user} = this.props;
+    const user = this.props.user;
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
@@ -165,8 +155,8 @@ class DrawerMenu extends React.Component {
               <ListItemText primary='Settings' />
           </ListItem>
           </Link>
-          <Link to = 'stats' style = {{textDecoration: "none"}}>
-          <ListItem style={{display: "none"}} button key={'About this'}>
+          <Link to = 'stats' style = {{display: "none"}}>
+          <ListItem  button key={'About this'} to = 'stats'>
               <ListItemIcon><MailIcon/></ListItemIcon>
               <ListItemText primary='About this'/>
           </ListItem>
@@ -180,19 +170,21 @@ class DrawerMenu extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = user => {
   return {
-    user: state.user,
+    user: user.user,
+    online: user.online,
+    message: user.message
   }
 }
 
 const checkLogin = (user, handleCloseAuthMenu, handleLogOff, handleLogIn) => {
   if (user.id != null) {
-    return   <><MenuItem onClick={this.handleCloseAuthMenu}>Profile</MenuItem>
-    <MenuItem onClick={ handleLogOff}>Log out</MenuItem></>
+    return  [ <MenuItem key="logedIn1" onClick={handleCloseAuthMenu}>Profile</MenuItem>,
+    <MenuItem  key="logedIn2" onClick={ handleLogOff}>Log out</MenuItem>]
     }else {
       return (
-        <MenuItem onClick={ handleLogIn}>
+        <MenuItem onClick={ handleCloseAuthMenu}>
           <Link to = 'login' style = {{textDecoration: "none"}}>Log in</Link>
         </MenuItem>
       )

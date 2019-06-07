@@ -1,12 +1,9 @@
-import { createStore, combineReducers } from "redux";
-import debts from './reducers/debts';
-import user from './reducers/user'
+import { createStore, applyMiddleware, compose} from "redux";
+import {reducer} from './reducers/index';
+import thunk from 'redux-thunk';
 
-const reducer = combineReducers({
-    debts,
-    user
-});
+const middleware = [thunk]
 
-const store = createStore(reducer);
+const store = createStore(reducer, compose(applyMiddleware(...middleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 export default store;
