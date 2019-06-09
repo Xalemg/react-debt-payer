@@ -20,12 +20,13 @@ export const login = (email, password) => {
           dispatch(loginSuccess(response.data))
         })
         .catch(error => {
+          console.log("Error login " + error);
           throw(error);
         });
     };
   };
   
-  export const loginSuccess = ({message, token, id}) => {
+  export const loginSuccess = ({message, token, id, image, name}) => {
     console.log("message " + JSON.stringify(message));
     
       return {
@@ -34,8 +35,9 @@ export const login = (email, password) => {
             message,
             token,
             id,
+            image,
+            name,
             online: true,
         }
       }
     }
-    

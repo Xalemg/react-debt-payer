@@ -22,6 +22,7 @@ import styles from "./styles";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {connect} from 'react-redux'
 import { Link } from "react-router-dom";
+import { logOut } from '../../redux/actions/users/logOut';
 
 class DrawerMenu extends React.Component {
   constructor( props) {
@@ -49,6 +50,7 @@ class DrawerMenu extends React.Component {
   handleLogOff =  () => {
     this.setState({ anchorEl: null });
     alert('Loged off');
+    this.props.logOut();
   } 
 
   render() {
@@ -58,7 +60,7 @@ class DrawerMenu extends React.Component {
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-    const login = checkLogin(user, this.handleCloseAuthMenu, this.handleLogOff, this.handleLogIn);
+    const login = checkLogin(user, this.handleCloseAuthMenu, this.handleLogOff);
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -170,26 +172,26 @@ class DrawerMenu extends React.Component {
     );
   }
 }
-const mapStateToProps = user => {
+const mapStateToProps = state => {
   return {
-    user: user.user,
-    online: user.online,
-    message: user.message
+   user: state.user
   }
 }
 
-const checkLogin = (user, handleCloseAuthMenu, handleLogOff, handleLogIn) => {
+const checkLogin = (user, handleCloseAuthMenu, handleLogOff) => {
   if (user.id != null) {
     return  [ <MenuItem key="logedIn1" onClick={handleCloseAuthMenu}>Profile</MenuItem>,
     <MenuItem  key="logedIn2" onClick={ handleLogOff}>Log out</MenuItem>]
     }else {
       return (
-        <MenuItem onClick={ handleCloseAuthMenu}>
-          <Link to = 'login' style = {{textDecoration: "none"}}>Log in</Link>
-        </MenuItem>
+        <Link to = 'login' style = {{textDecoration: "none"}}>
+          <MenuItem  onClick={ handleCloseAuthMenu} style = {{textDecoration: "none"}}>
+            Log in
+          </MenuItem>
+        </Link>
       )
   }
 }
 
 
-export default withStyles(styles, { withTheme: true })(connect(mapStateToProps)(DrawerMenu))
+export default withStyles(styles, { withTheme: true })(connect(mapStateToProps, {logOut})(DrawerMenu))
