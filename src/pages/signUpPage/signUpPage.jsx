@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {register} from '../../redux/actions/users/register'
-import useSignUpForm from '../../components/userLoginForm/userLoginForm';
+import useSignUpForm from '../../components/aux/userLoginForm/userLoginForm';
 import {connect} from 'react-redux'
 
 
@@ -46,6 +46,8 @@ const SignUpPage = (props) => {
 
   const handleSignUp = () => {
     props.register(inputs.email, inputs.password,inputs.userName);
+    return '<Link href="login" variant="body2">'
+
   }
   const {inputs, handleInputChange, handleSubmit} = useSignUpForm(handleSignUp);
 
@@ -79,7 +81,6 @@ const SignUpPage = (props) => {
                 autoComplete="fname"
                 name="userName"
                 variant="outlined"
-                required
                 fullWidth
                 id="userName"
                 label="User Name"

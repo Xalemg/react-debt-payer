@@ -6,7 +6,7 @@ const initialState = {
     email: null,
     avatar: null,
     name: null,
-    token: null
+    token: "null"
 };
 
  function reducer(state = initialState, {
@@ -22,7 +22,7 @@ const initialState = {
         online: payload.online,
         id: payload.id,
         token: payload.token,
-        avatar: payload.image,
+        image: payload.image,
         name: payload.name,
       };
     }

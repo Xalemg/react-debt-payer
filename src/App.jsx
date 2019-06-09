@@ -19,18 +19,21 @@ function App() {
     <Provider store = {store}>
       <div className="App">
         <BrowserRouter >
-        <DrawerMenu/>
         <Switch>
           <Route path = '/logIn' component ={loginPage}/>
-          <Route path = '/overview' component ={overViewPage}/>
           <Route path = '/signUp' component = {signUpPage}/>
+          <Route path = '/home' component ={home}/>
+          <DrawerMenu/>
+        </Switch>
+        <Switch>
+          <Route path = '/overview' component ={overViewPage}/>
           <Route path = '/own' component = {ownPage}/>
           <Route path = '/owned' component = {ownedPage}/>
           <Route path = '/stats' component = {statsPage}/>
           <Route path = '/settings' component = {settingsPage}/>
           <Route path = '/debts/:debtId'/>
-          <Route path = '/home' component ={home}/>
-          <Route path = '/' component ={home}/>
+          <Route path = '/debts/addDebt'/>
+          <Route exact path = '/' component ={home}/>
         </Switch>
         </BrowserRouter>
       </div>

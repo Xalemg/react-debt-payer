@@ -5,7 +5,7 @@ export const PING_SERVER = 'PING_SERVER';
 export const SIGN_UP_SUCCESS = 'User created succesfully';
 export const LOG_OUT_MESSAGE = 'User Log Out';
 export const LOG_IN_FAIL = 'Authentication failed';
-
+export const DEBT_ADDED_SUCCESS = 'Debt saved successfully'
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';

@@ -1,5 +1,5 @@
 import {  combineReducers } from "redux";
-import debts from './debts';
+import debts from './debtsReducer';
 import user from './userReducer'
 import utils from './utils'
 
