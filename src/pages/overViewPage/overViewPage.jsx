@@ -15,9 +15,7 @@ export class overViewPage extends React.Component {
 
   render() {
     return (
-      <div>
-        overview
-      </div>
+      JSON.stringify(this.props.debts)
     )
   }
 }

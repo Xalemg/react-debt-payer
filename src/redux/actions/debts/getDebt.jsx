@@ -1,13 +1,17 @@
 import axios from 'axios';
-import { REGISTER, baseUrl, SIGN_UP_SUCCESS} from '../types';
+import { FETCH_DEBT, baseUrl} from '../types';
 
 export const getDebt = (token, id) => {
   return (dispatch) => {
     
     return axios({
-      method: "POST",
-      url:baseUrl + "/users/signup",
+      method: "GET",
+      url:baseUrl + "/debts/:debtID",
+      params: {
+        debtID : id
+      },
       headers: {
+        Authorization: "Bearer " + token,
         type: "application/json",
       },
      })
@@ -20,25 +24,12 @@ export const getDebt = (token, id) => {
   };
 };
 
-  export const getDebtSuccess = ({message, email, password}, name) => {
-    if(message === SIGN_UP_SUCCESS) {
+  export const getDebtSuccess = (debt) => {
+    
       return {
-        type: REGISTER,
+        type: FETCH_DEBT,
         payload: {
-            message,
-            email,
-            password,
-            name,
-            online: true,
+          debt,
         }
       }
-    } else {
-      return {
-        type: REGISTER,
-        payload: {
-            message,
-        }
-      }
-    }
-
     }

@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, REGISTER } from '../actions/types';
+import { LOGIN, LOGOUT, REGISTER , UPDATE_USER} from '../actions/types';
 const initialState = {
   message: "",
   online: false,
@@ -6,7 +6,7 @@ const initialState = {
     email: null,
     avatar: null,
     name: null,
-    token: "null"
+    token: null
 };
 
  function reducer(state = initialState, {
@@ -39,6 +39,16 @@ const initialState = {
       };
     }
     case REGISTER: {
+      return { ...state,
+        message: payload.message,
+        online: payload.online,
+        id: payload.id,
+        token: payload.token,
+        avatar: payload.image,
+        name: payload.name,
+      };
+    }
+    case UPDATE_USER: {
       return { ...state,
         message: payload.message,
         online: payload.online,

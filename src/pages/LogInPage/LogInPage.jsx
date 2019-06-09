@@ -13,7 +13,7 @@ import Container from '@material-ui/core/Container';
 import {connect} from 'react-redux'
 import {login} from '../../redux/actions/users/login'
 import useSignUpForm from '../../components/aux/userLoginForm/userLoginForm';
-
+import { Redirect } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -49,6 +49,8 @@ function LogInPage(props) {
   const {inputs, handleInputChange, handleSubmit} = useSignUpForm(handleLogIn );
 
   return (
+    
+    props.user.token!==null ? <Redirect to = "overview"></Redirect> :
     <Container component="main" maxWidth="xs" >
       <CssBaseline />
       <div className={classes.paper}>
@@ -110,7 +112,11 @@ function LogInPage(props) {
   );
 }
 
+const mapStateToProps = state => {
+  return {
+   user: state.user
+  }
+}
 
 
-
-export default (connect(null, {login})(LogInPage))
+export default (connect(mapStateToProps, {login})(LogInPage))

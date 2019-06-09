@@ -46,8 +46,6 @@ const SignUpPage = (props) => {
 
   const handleSignUp = () => {
     props.register(inputs.email, inputs.password,inputs.userName);
-    return '<Link href="login" variant="body2">'
-
   }
   const {inputs, handleInputChange, handleSubmit} = useSignUpForm(handleSignUp);
 

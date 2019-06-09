@@ -133,13 +133,13 @@ class DrawerMenu extends React.Component {
           <Link to = '/own' style = {{textDecoration: "none"}}>
           <ListItem button key={'Debts I own'}>
               <ListItemIcon><Own/></ListItemIcon>
-              <ListItemText primary='Debts I own'/>
+              <ListItemText primary='Debts I owe'/>
           </ListItem>
           </Link>  
           <Link to = 'owned' style = {{textDecoration: "none"}}>
-          <ListItem button key={'Debts being Owned'}>
+          <ListItem button key={'Debts being Owed'}>
               <ListItemIcon><Owned/></ListItemIcon>
-              <ListItemText primary='Debts being Owned'/>
+              <ListItemText primary='Debts being owed'/>
           </ListItem>
           </Link>  
           <Link to = 'stats' style = {{textDecoration: "none"}}>
