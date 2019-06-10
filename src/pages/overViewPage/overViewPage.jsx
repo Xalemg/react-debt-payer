@@ -9,7 +9,6 @@ import styles from "./style";
 import classNames from 'classnames';
 import DebtTable from '../../components/DebtTable/DebtTable'
 import Title from '../../components/Title/Title'
-
 export class overViewPage extends React.Component {
 
 
@@ -38,8 +37,8 @@ export class overViewPage extends React.Component {
           </Paper>
         </Grid>
         {/* Recent Debts */}
-        <Grid item xs={12}>
-        <Title className = {classNames(classes.title)} > Recent Debts</Title>
+        <Grid item xs={12} className = {classNames(classes.debtPaper)}>
+        <Title textAlign= 'left' > Recent Debts</Title>
           <DebtTable debts = { JSON.stringify(this.props.debts) } className = {classNames(classes.debtTable)}/>
         </Grid>
       </Grid>

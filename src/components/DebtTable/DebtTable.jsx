@@ -28,7 +28,8 @@ export default function SimpleCard() {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Grid>
+      <Grid container>
+        <Grid  xs={8}>
         <Typography variant="h6" component="h1">
          Reason
         </Typography>
@@ -40,6 +41,16 @@ export default function SimpleCard() {
           <br />
           {'"a benevolent smile"'}
         </Typography>
+        </Grid>
+        {/*Total*/}
+        <Grid item xs={4}>
+        <Typography component="p">
+          Date
+        </Typography>
+        <Typography variant="h6" component="h1">
+          Amount
+        </Typography>
+        </Grid>
         </Grid>
       </CardContent>
     </Card>
