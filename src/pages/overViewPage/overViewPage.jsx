@@ -9,6 +9,8 @@ import styles from "./style";
 import classNames from 'classnames';
 import DebtTable from '../../components/DebtTable/DebtTable'
 import Title from '../../components/Title/Title'
+import Summary from '../../components/Summary/Summary'
+
 export class overViewPage extends React.Component {
 
 
@@ -24,10 +26,9 @@ export class overViewPage extends React.Component {
     return (
       <Container maxWidth="xl" >
       <Grid container spacing={3}  className = {classNames(classes.container)} >
-         {/* Overall sumary */}
          <Grid item xs={12} md={4} lg={3}>
           <Paper>
-          { JSON.stringify(this.props.debts)}
+          <Summary></Summary>
           </Paper>
         </Grid>
         {/* Chart */}
@@ -37,9 +38,9 @@ export class overViewPage extends React.Component {
           </Paper>
         </Grid>
         {/* Recent Debts */}
-        <Grid item xs={12} className = {classNames(classes.debtPaper)}>
-        <Title textAlign= 'left' > Recent Debts</Title>
-          <DebtTable debts = { JSON.stringify(this.props.debts) } className = {classNames(classes.debtTable)}/>
+        <Grid item xs={12} className = {classNames(classes.debtPaper)} >
+        <Title textAlign= 'left' >Recent Debts</Title>
+          <DebtTable debts = { this.props.debts.debts} className = {classNames(classes.debtTable)}/>
         </Grid>
       </Grid>
     </Container>
