@@ -7,9 +7,10 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import styles from "./style";
 import classNames from 'classnames';
-import DebtTable from '../../components/DebtTable/DebtTable'
+import DebtList from '../../components/DebtList/DebtList'
 import Title from '../../components/Title/Title'
 import Summary from '../../components/Summary/Summary'
+import { Typography } from '@material-ui/core';
 
 export class overViewPage extends React.Component {
 
@@ -28,7 +29,14 @@ export class overViewPage extends React.Component {
       <Grid container spacing={3}  className = {classNames(classes.container)} >
          <Grid item xs={12} md={4} lg={3}>
           <Paper>
-          <Summary></Summary>
+          <Summary total = {
+            this.props.debts.debts.length > 1 ? 
+            this.props.debts.debts.reduce( ( a, b ) => {
+            return a.amount + b.amount
+          }) :
+          0
+        }>
+          </Summary>
           </Paper>
         </Grid>
         {/* Chart */}
@@ -38,9 +46,13 @@ export class overViewPage extends React.Component {
           </Paper>
         </Grid>
         {/* Recent Debts */}
+        {console.log(this.props.debts.debts)
+        }
         <Grid item xs={12} className = {classNames(classes.debtPaper)} >
         <Title textAlign= 'left' >Recent Debts</Title>
-          <DebtTable debts = { this.props.debts.debts} className = {classNames(classes.debtTable)}/>
+        {this.props.debts.debts.length > 1 ? 
+        <DebtList debts = { this.props.debts.debts} className = {classNames(classes.debtTable)}/> :
+        <Typography variant="h6" component="h1"> No hay ninguna deuda todavia</Typography>}
         </Grid>
       </Grid>
     </Container>

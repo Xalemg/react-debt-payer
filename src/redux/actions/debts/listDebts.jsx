@@ -24,8 +24,6 @@ export const listDebts = (token) => {
 };
 
   export const listDebtsSuccess = ({count,debts}) => {
-    console.log(debts);
-    console.log(count);
       return {
         type: LIST_DEBTS,
         payload: {

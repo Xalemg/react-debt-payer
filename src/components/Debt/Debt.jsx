@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 const useStyles = makeStyles({
   card: {
-    minWidth: 275,
+    margin: '10px',
+    marginBottom: '10px',
   },
   bullet: {
     display: 'inline-block',
@@ -21,7 +22,7 @@ const useStyles = makeStyles({
   },
   alignLeft : {
     marginLeft: '0px',
-  }
+  },
 });
 
 export default function Debt(props) {
@@ -29,7 +30,7 @@ export default function Debt(props) {
 
   return (
       
-    <Card >
+    <Card className = {classes.card}>
       <CardContent >
       <Grid container >
         <Grid item xs={8}>

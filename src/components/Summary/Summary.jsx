@@ -10,13 +10,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Summary() {
+export default function Summary( props ) {
   const classes = useStyles();
   return (
     <React.Fragment>
       <Title>Summary</Title>
       <Typography component="p" variant="h4">
-        Total number
+       { props.total}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
         last payment on 15 March, 2019
