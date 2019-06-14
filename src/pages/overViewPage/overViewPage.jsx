@@ -18,24 +18,45 @@ export class overViewPage extends React.Component {
   componentDidMount =() => {
 
       this.props.listDebts(this.props.user.token)
+
+  }
+
+  getTotalDebt = (debts) => {
+
+    if ( debts.length > 0 ) {
+      const amounts = debts.map( (debt) => {
+        return debt.amount;
+      });          
+        return amounts.reduce((a,b) => a + b)
+     } else {
+      return  0
+     }   
+  }
+
+  getLastDate = (debts) => {
     
+    if (debts.length > 0) {
+     const dates = debts.map( (debt) => {
+       return new Date (debt.date);
+     });          
+     const maxDate =  new Date(Math.max.apply(null,dates));
+     return maxDate.toDateString();
+    } else {
+      return debts;
+    }
   }
 
 
   render() {
+    
     const { classes } = this.props;
     return (
       <Container maxWidth="xl" >
-      <Grid container spacing={3}  className = {classNames(classes.container)} >
+      <Grid container spacing={3} className = {classNames(classes.container)} >
          <Grid item xs={12} md={4} lg={3}>
           <Paper>
-          <Summary total = {
-            this.props.debts.debts.length > 1 ? 
-            this.props.debts.debts.reduce( ( a, b ) => {
-            return a.amount + b.amount
-          }) :
-          0
-        }>
+          <Summary lastDate = { this.getLastDate( this.props.debts.debts) }
+          totalDebt = { this.getTotalDebt( this.props.debts.debts) }>
           </Summary>
           </Paper>
         </Grid>
@@ -46,13 +67,12 @@ export class overViewPage extends React.Component {
           </Paper>
         </Grid>
         {/* Recent Debts */}
-        {console.log(this.props.debts.debts)
-        }
+        
         <Grid item xs={12} className = {classNames(classes.debtPaper)} >
         <Title textAlign= 'left' >Recent Debts</Title>
         {this.props.debts.debts.length > 1 ? 
         <DebtList debts = { this.props.debts.debts} className = {classNames(classes.debtTable)}/> :
-        <Typography variant="h6" component="h1"> No hay ninguna deuda todavia</Typography>}
+        <Typography variant="h6" component="h1"> There's no payment yet</Typography>}
         </Grid>
       </Grid>
     </Container>

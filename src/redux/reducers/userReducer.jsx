@@ -6,7 +6,8 @@ const initialState = {
     email: null,
     avatar: null,
     name: null,
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhY2Fmcml0YTEyQGhvdG1haWwuY29tIiwidXNlcklkIjoiNWNlOTAxN2IyOTgyODYwMDEzMTkwMTg0IiwiaWF0IjoxNTYwNTIwOTgyfQ.aUktBxct9pOKCwaA7DyAmB-VF4KN3viKinX4A3ts8DA"
+    //token: null,
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InhhbGVtZ0BnbWFpbC5jb20iLCJ1c2VySWQiOiI1Y2ZjZDk1Yjc0OTdiOTAwMTQwNWMzNGIiLCJpYXQiOjE1NjA1MjUwNDN9.1Du9S1A0VX-6lney8db_TjVgogX61ok2EI440iIC3qs'
 };
 
  function reducer(state = initialState, {

@@ -16,10 +16,10 @@ export default function Summary( props ) {
     <React.Fragment>
       <Title>Summary</Title>
       <Typography component="p" variant="h4">
-       { props.total}
+       { props.totalDebt + "€"}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        last payment on 15 March, 2019
+        last payment on { props.lastDate}
       </Typography>
       <div>
         <Link color="primary" >
