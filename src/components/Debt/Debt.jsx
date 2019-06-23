@@ -6,8 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 const useStyles = makeStyles({
   card: {
-    margin: '10px',
+    margin: '20px',
     marginBottom: '10px',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+
   },
   bullet: {
     display: 'inline-block',

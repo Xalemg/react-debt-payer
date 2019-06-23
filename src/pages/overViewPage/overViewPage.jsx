@@ -11,9 +11,13 @@ import DebtList from '../../components/DebtList/DebtList'
 import Title from '../../components/Title/Title'
 import Summary from '../../components/Summary/Summary'
 import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+const useStyles = makeStyles(theme => ({
+
+  }));
 export class overViewPage extends React.Component {
-
 
   componentDidMount =() => {
 
@@ -48,8 +52,8 @@ export class overViewPage extends React.Component {
 
 
   render() {
-    
-    const { classes } = this.props;
+
+    const { classes } = {...this.props, useStyles};
     return (
       <Container maxWidth="xl" >
       <Grid container spacing={3} className = {classNames(classes.container)} >

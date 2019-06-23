@@ -23,6 +23,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {connect} from 'react-redux'
 import { Link } from "react-router-dom";
 import { logOut } from '../../redux/actions/users/logOut';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 class DrawerMenu extends React.Component {
   constructor( props) {
@@ -168,6 +170,7 @@ class DrawerMenu extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
         </main>
+        <Fab color="primary" aria-label="Add" className={classes.fab}><AddIcon /></Fab>
       </div>
     );
   }
