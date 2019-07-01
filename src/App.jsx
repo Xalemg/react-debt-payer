@@ -12,12 +12,13 @@ import { Provider } from 'react-redux';
 import store from './redux/store'
 import settingsPage from './pages/settingsPage/settingsPage';
 import statsPage from './pages/statsPage/statsPage';
+import AddDebtPage from './pages/AddDebtPage/AddDebtPage';
 
 function App() {
   return (
     <Provider store = {store}>
       <div className="App">
-        <BrowserRouter >
+        <BrowserRouter>
         <Switch>
           <Route path = '/logIn' component ={loginPage}/>
           <Route path = '/signUp' component = {signUpPage}/>
@@ -30,8 +31,8 @@ function App() {
           <Route path = '/owned' component = {ownedPage}/>
           <Route path = '/stats' component = {statsPage}/>
           <Route path = '/settings' component = {settingsPage}/>
+          <Route path = '/debts/addDebt' component= {AddDebtPage}/>
           <Route path = '/debts/:debtId'/>
-          <Route path = '/debts/addDebt'/>
           <Route exact path = '/' component ={home}/>
         </Switch>
         </BrowserRouter>
