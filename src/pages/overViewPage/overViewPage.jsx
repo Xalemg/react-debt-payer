@@ -71,7 +71,6 @@ export class overViewPage extends React.Component {
           </Paper>
         </Grid>
         {/* Recent Debts */}
-        
         <Grid item xs={12} className = {classNames(classes.debtPaper)} >
         <Title textAlign= 'left' >Recent Debts</Title>
         {this.props.debts.debts.length > 1 ? 

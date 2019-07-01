@@ -68,11 +68,6 @@ const styles = theme => ({
     appTitle: {
       margin: "0 20px", 
       overflowX: "clip",
-    },
-    fab: {
-      position: 'fixed',
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
     }
   });
 

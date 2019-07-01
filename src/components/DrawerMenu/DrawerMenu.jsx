@@ -23,8 +23,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {connect} from 'react-redux'
 import { Link } from "react-router-dom";
 import { logOut } from '../../redux/actions/users/logOut';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import AddDebtFab from '../AddDebtFab/AddDebtFab'
 
 class DrawerMenu extends React.Component {
   constructor( props) {
@@ -33,6 +32,7 @@ class DrawerMenu extends React.Component {
     this.state = {
       openMenu: false,
       anchorEl: null,
+      showAddDebtModal: false,
     };
   }
 
@@ -49,6 +49,7 @@ class DrawerMenu extends React.Component {
   handleCloseAuthMenu = () => {
     this.setState({ anchorEl: null });
   };
+
   handleLogOff =  () => {
     this.setState({ anchorEl: null });
     alert('Loged off');
@@ -56,7 +57,6 @@ class DrawerMenu extends React.Component {
   } 
 
   render() {
-
 
     const user = this.props.user;
     const { classes } = this.props;
@@ -123,8 +123,7 @@ class DrawerMenu extends React.Component {
         >
           <div className={classes.toolbar}>
           </div>
-          <Divider />
-          {/* TODO move next items of the drawer to the draweContent component*/}
+          <Divider/>
           <List>
           <Link to = '/overview'  style = {{textDecoration: "none"}}>
           <ListItem button key={'Overview'}>
@@ -170,7 +169,7 @@ class DrawerMenu extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
         </main>
-        <Fab color="primary" aria-label="Add" className={classes.fab}><AddIcon /></Fab>
+        <AddDebtFab/>
       </div>
     );
   }

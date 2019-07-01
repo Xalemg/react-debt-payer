@@ -13,7 +13,6 @@ import store from './redux/store'
 import settingsPage from './pages/settingsPage/settingsPage';
 import statsPage from './pages/statsPage/statsPage';
 
-
 function App() {
   return (
     <Provider store = {store}>
