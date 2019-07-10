@@ -40,6 +40,9 @@ import { makeStyles } from '@material-ui/core/styles';
     group: {
       margin: theme.spacing(1, 0),
     },
+    input: {
+      width: 42,
+    },
   }));
 
   export default useStyles;

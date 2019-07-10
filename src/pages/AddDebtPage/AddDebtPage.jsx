@@ -4,20 +4,32 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './style'
 import Typography from '@material-ui/core/Typography';
-import {FormControlLabel, Grid, TextField, Checkbox, Button, Radio, RadioGroup,  } from '@material-ui/core'
-import Autosuggest from 'react-autosuggest';
+import {FormControlLabel, Grid, TextField, Button, Radio, RadioGroup, Input, Slider  } from '@material-ui/core'
 
 
 
-
-export default function AddDebtPage() {
+export default function AddDebtPage(props) {
   const classes = useStyles();
-  
-  const [value, setValue] = React.useState('female');
+  const [payer, satPayer] = React.useState('female');
+  const [amount, setAmount] = React.useState(30);
 
   function handleChange(event) {
-    setValue(event.target.value);
+    satPayer(event.target.value);
   }
+  const handleSliderChange = (event, newValue) => {
+    setAmount(newValue);
+  };
+  const handleInputChange = event => {
+    setAmount(event.target.value === '' ? '' : Number(event.target.value));
+  };
+
+  const handleBlur = () => {
+    if (amount < 0) {
+      setAmount(0);
+    } else if (amount > 100) {
+      setAmount(100);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -63,14 +75,14 @@ export default function AddDebtPage() {
         <Grid item xs={12} sm={6}>
           <TextField id="state" name="state" label="State/Province/Region" fullWidth />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid container item xs={12} sm={12}>
         <Grid item xs={12} sm={6}>
-         <Typography>Who paid?</Typography>
+         <Typography align ="left">Who paid?</Typography>
         <RadioGroup
           aria-label="Gender"
           name="gender1"
           className={classes.group}
-          value={value}
+          value={payer}
           onChange={handleChange}
         >
           <FormControlLabel value="negative" control={<Radio   color="primary"/>} label="I got paid" />
@@ -78,13 +90,37 @@ export default function AddDebtPage() {
         </RadioGroup>
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Button color="secondary" variant="outlined" className={classes.button}>
-        Cancel
-        </Button>
+        <Typography align ="left">What amount?</Typography>
+        <Grid item xs={12} sm={12}>
+          <Slider
+            value={typeof value === 'number' ? amount : 0}
+            onChange={handleSliderChange}
+            aria-labelledby="input-slider"
+          />
+        </Grid>
+        <Grid item className={classes.slider}>
+          <Input
+            className={classes.input}
+            value={amount}
+            margin="dense"
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            inputProps={{
+              step: 1,
+              min: 0,
+              max: 100,
+              name:"amount",
+              label:"€",
+              type: 'number',
+              'aria-labelledby': 'input-slider',
+            }}
+          ></Input>
+        <Typography align ="left">€</Typography>
+        </Grid>
         </Grid>
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Button color="secondary" variant="outlined" className={classes.button}>
+        <Button color="secondary" variant="outlined" className={classes.button} onClick={() => props.history.goBack()}>
         Cancel
         </Button>
         </Grid>

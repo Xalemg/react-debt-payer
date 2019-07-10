@@ -31,7 +31,7 @@ function App() {
           <Route path = '/owned' component = {ownedPage}/>
           <Route path = '/stats' component = {statsPage}/>
           <Route path = '/settings' component = {settingsPage}/>
-          <Route path = '/debts/addDebt' component= {AddDebtPage}/>
+          <Route exact path = '/debts/addDebt'  component= {AddDebtPage}/>
           <Route path = '/debts/:debtId'/>
           <Route exact path = '/' component ={home}/>
         </Switch>

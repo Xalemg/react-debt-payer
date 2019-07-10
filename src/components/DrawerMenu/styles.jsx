@@ -68,7 +68,13 @@ const styles = theme => ({
     appTitle: {
       margin: "0 20px", 
       overflowX: "clip",
-    }
+    },
+    input: {
+      width: 42,
+    },
+    slider: {
+      width: 250,
+    },
   });
 
   export default styles;
