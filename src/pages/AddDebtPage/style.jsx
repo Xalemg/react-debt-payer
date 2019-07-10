@@ -27,11 +27,18 @@ import { makeStyles } from '@material-ui/core/styles';
     },
     buttons: {
       display: 'flex',
+      margin: theme.spacing(1),
       justifyContent: 'flex-end',
     },
     button: {
       marginTop: theme.spacing(3),
       marginLeft: theme.spacing(1),
+    },
+    formControl: {
+      margin: theme.spacing(3),
+    },
+    group: {
+      margin: theme.spacing(1, 0),
     },
   }));
 

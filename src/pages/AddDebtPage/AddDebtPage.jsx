@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './style'
 import Typography from '@material-ui/core/Typography';
-import {FormControlLabel, Grid, TextField, Checkbox} from '@material-ui/core'
+import {FormControlLabel, Grid, TextField, Checkbox, Button, Radio, RadioGroup,  } from '@material-ui/core'
 import Autosuggest from 'react-autosuggest';
 
 
@@ -12,7 +12,12 @@ import Autosuggest from 'react-autosuggest';
 
 export default function AddDebtPage() {
   const classes = useStyles();
+  
+  const [value, setValue] = React.useState('female');
 
+  function handleChange(event) {
+    setValue(event.target.value);
+  }
 
   return (
     <React.Fragment>
@@ -38,52 +43,55 @@ export default function AddDebtPage() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="lastName"
-            name="lastName"
-            label="Last name"
+            id="reason"
+            name="reason"
+            label="Reason"
             fullWidth
-            autoComplete="lname"
+            autoComplete="reason"
           />
         </Grid>
         
         <Grid item xs={12} sm={6}>
           <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
+            id="amount"
+            name="amount"
+            label="Amount"
             fullWidth
-            autoComplete="billing address-level2"
+            autoComplete="amount"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField id="state" name="state" label="State/Province/Region" fullWidth />
         </Grid>
+        <Grid item xs={12} sm={12}>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="billing postal-code"
-          />
+         <Typography>Who paid?</Typography>
+        <RadioGroup
+          aria-label="Gender"
+          name="gender1"
+          className={classes.group}
+          value={value}
+          onChange={handleChange}
+        >
+          <FormControlLabel value="negative" control={<Radio   color="primary"/>} label="I got paid" />
+          <FormControlLabel value="positive" control={<Radio />}  label="I paid" />
+        </RadioGroup>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="billing country"
-          />
+        <Button color="secondary" variant="outlined" className={classes.button}>
+        Cancel
+        </Button>
         </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+        <Button color="secondary" variant="outlined" className={classes.button}>
+        Cancel
+        </Button>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+        <Button color="primary" variant="contained" className={classes.button}>
+        ADD
+      </Button>
         </Grid>
       </Grid>
     </React.Fragment>

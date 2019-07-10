@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {register} from '../../redux/actions/users/register'
-import useSignUpForm from '../../components/aux/userLoginForm/userLoginForm';
+import useSignUpForm from '../../components/auxiliar/userLoginForm/userLoginForm';
 import {connect} from 'react-redux'
 
 
