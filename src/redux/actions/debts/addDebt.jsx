@@ -5,14 +5,15 @@ import {
   baseUrl
 } from '../types';
 
-export const addDebt = (debtor, reason, amount, description, date) => {
+export const addDebt = (debtor, reason, amount, description, date, token) => {
   return (dispatch) => {
-
+    
     return axios({
         method: "POST",
-        url: baseUrl + "/debts/",
+        url:baseUrl + "/debts",
         headers: {
           type: "application/json",
+          Authorization: "Bearer " + token
         },
         data: {
           debtor,
@@ -37,7 +38,6 @@ export const addDebtSucces = (message, debt) => {
       type: ADD_DEBT,
       payload: {
         message,
-        debt,
       }
     }
   } else {

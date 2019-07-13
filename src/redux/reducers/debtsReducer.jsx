@@ -26,10 +26,9 @@ function reducer(state = initialState,{ type, payload}) {
   case ( ADD_DEBT ): {
     console.log('reducer' + payload);
     return {...state,
-      user: {
+      
         message: payload.message
-      },
-      debts: payload.debt
+      
     }
   }
   case ( DELETE_DEBT ): {

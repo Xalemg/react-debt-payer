@@ -25,8 +25,10 @@ function AddDebtPage(props) {
   });
 
 
-  const sendDebtToServer = values => {
+  const sendDebtToServer = (values,token) => {
+    console.log(token);
     
+    props.addDebt(values.person, values.reason,values.amount,values.description, values.date, token)
   }
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -92,6 +94,7 @@ function AddDebtPage(props) {
           name="description" 
           label="Description" 
           value={values.description}
+          onChange={handleChange('description')}
           fullWidth
           multiline
           variant="outlined"
@@ -149,7 +152,7 @@ function AddDebtPage(props) {
         </Button>
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Button color="primary" variant="contained" className={classes.button} onClick ={sendDebtToServer({...values, date})}>
+        <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user.token)}>
         ADD
       </Button>
         </Grid>
@@ -160,5 +163,9 @@ function AddDebtPage(props) {
     </React.Fragment>
   );
 }
-
-export default connect(null, {addDebt})(AddDebtPage)
+const mapStateToProps = state => {
+  return {
+   user: state.user
+  }
+}
+export default connect(mapStateToProps, {addDebt})(AddDebtPage)
