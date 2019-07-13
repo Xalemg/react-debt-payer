@@ -70,11 +70,14 @@ const styles = theme => ({
       overflowX: "clip",
     },
     input: {
-      width: 42,
+      fullWidth: true,
     },
     slider: {
-      width: 250,
+      width: "100%",
     },
+    marginBot : {
+     marginBottom: theme.spacing(3),
+    }
   });
 
   export default styles;
