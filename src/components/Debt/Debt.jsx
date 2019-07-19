@@ -1,59 +1,84 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import clsx from 'clsx';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
-import { Grid } from '@material-ui/core';
-const useStyles = makeStyles({
-  card: {
-    margin: '20px',
-    marginBottom: '10px',
-    paddingLeft: '5%',
-    paddingRight: '5%',
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';;
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    marginTop:"10px"
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
   },
-  title: {
-    fontSize: 14,
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
   },
-  pos: {
-    marginBottom: 12,
+  icon: {
+    verticalAlign: 'bottom',
+    height: 20,
+    width: 20,
   },
-  alignLeft : {
-    marginLeft: '0px',
+  details: {
+    alignItems: 'center',
   },
-});
+  column: {
+    flexBasis: '33.33%',
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: theme.spacing(1, 2),
+  },
+  link: {
+    color: theme.palette.primary.main,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+}));
 
 export default function Debt(props) {
   const classes = useStyles();
 
   return (
-      
-    <Card className = {classes.card}>
-      <CardContent >
-      <Grid container >
-        <Grid item xs={8}>
-        <Typography variant="h6" component="h1">
-        {props.reason}
-        </Typography>
-        <Typography className={classes.pos}>
-        {props.debtor}
-        </Typography>
-        </Grid>
-        <Grid item xs={4} className={classes.alignLeft} >
-        <Typography  component="p" align = 'right'>
-        {props.date}
-        </Typography>
-        <Typography variant="h6" component="h1"  align = 'right'>
-        {props.amount}
-        </Typography>
-        </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+    <div className={classes.root}>
+      <ExpansionPanel TransitionProps={{ unmountOnExit: true }}>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1c-content"
+          id="panel1c-header"
+        >
+          <div className={classes.column}>
+            <Typography className={classes.heading}>{props.debtor}</Typography>
+          </div>
+          <div className={classes.column}>
+            <Typography className={classes.secondaryHeading}>{props.reason}</Typography>
+          </div>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.details}>
+          <div className={classes.column} />
+          <div className={classes.column}>
+            <Chip label="Barbados" onDelete={() => {}} />
+          </div>
+        </ExpansionPanelDetails>
+        <Divider />
+        <ExpansionPanelActions>
+          <Button size="small">Cancel</Button>
+          <Button size="small" color="primary">
+            Save
+          </Button>
+        </ExpansionPanelActions>
+      </ExpansionPanel>
+      </div>
   );
 }

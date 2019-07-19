@@ -8,6 +8,7 @@ import { green } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   fab: {
+    zIndex:"1000",
     position: 'fixed',
     color: theme.palette.common.white,
     bottom: theme.spacing(3),
