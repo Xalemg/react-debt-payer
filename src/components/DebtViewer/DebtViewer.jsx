@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import {FormControlLabel, Grid, TextField, Button, Radio, RadioGroup, InputAdornment, IconButton } from '@material-ui/core'
 import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import 'date-fns';
 import {connect} from 'react-redux'
 import { addDebt } from '../../redux/actions/debts/addDebt';
 

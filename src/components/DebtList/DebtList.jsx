@@ -24,7 +24,7 @@ export default function DebtTable(props) {
   return (
     <GridList cols = {1} className={classes.gridList}>
      { props.debts.map(debt => 
-    <Debt className={classes.debt} debtor ={debt.debtor} amount =  {debt.amount} reason ="invent" date =  {debt.amount} key = {debt._id}></Debt>
+    <Debt className={classes.debt} debtor ={debt.debtor} description = {debt.description} amount =  {debt.amount} reason ={debt.reason} date =  {debt.date} key = {debt._id}></Debt>
   )}
     </GridList>
     )

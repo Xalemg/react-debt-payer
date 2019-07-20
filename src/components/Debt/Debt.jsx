@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -9,7 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';;
+import Divider from '@material-ui/core/Divider';
+import * as moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -62,7 +62,10 @@ export default function Debt(props) {
             <Typography className={classes.heading}>{props.debtor}</Typography>
           </div>
           <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>{props.reason}</Typography>
+            <Typography className={classes.heading}>{props.reason}</Typography>
+          </div>
+          <div className={classes.column}>
+            <Typography className={classes.heading}>{moment(props.date).format(`HH:mm    DD/MM/YYYY`)}</Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
