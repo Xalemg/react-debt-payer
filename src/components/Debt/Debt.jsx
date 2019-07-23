@@ -6,15 +6,16 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import * as moment from 'moment';
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    marginTop:"10px"
+    marginTop:"10px",
+    paddingLeft: "1%",
+    paddingRight: "1%"
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -46,8 +47,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }));
-
-export default function Debt(props) {
+const Debt =  (props) => {
   const classes = useStyles();
 
   return (
@@ -58,30 +58,38 @@ export default function Debt(props) {
           aria-controls="panel1c-content"
           id="panel1c-header"
         >
+
+          <div className={classes.column}>
+          <Typography  className={classes.heading}>{moment(props.date).format(`HH:mm    DD/MM/YYYY`)}</Typography>
+          </div>
           <div className={classes.column}>
             <Typography className={classes.heading}>{props.debtor}</Typography>
           </div>
           <div className={classes.column}>
-            <Typography className={classes.heading}>{props.reason}</Typography>
-          </div>
-          <div className={classes.column}>
-            <Typography className={classes.heading}>{moment(props.date).format(`HH:mm    DD/MM/YYYY`)}</Typography>
+          <Typography align= "right" className={classes.heading}>{props.amount}€</Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
-          <div className={classes.column} />
           <div className={classes.column}>
-            <Chip label="Barbados" onDelete={() => {}} />
+          <Typography className={classes.heading}>{props.reason}</Typography>
+          </div>
+          <div className={classes.column}>
+          <Typography className={classes.heading}>{props.description}</Typography>
+          </div>
+          <div align = "right" className={classes.column}>
+          <Button size="small">Close</Button>
+          <Button size="small" color="primary"    
+           onClick={() => {  props.history.push('/debts/editDebt'); }}>
+            Edit
+          </Button>
           </div>
         </ExpansionPanelDetails>
-        <Divider />
         <ExpansionPanelActions>
-          <Button size="small">Cancel</Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
+         
         </ExpansionPanelActions>
       </ExpansionPanel>
       </div>
   );
 }
+
+export default withRouter(Debt);
