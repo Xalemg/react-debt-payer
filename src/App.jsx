@@ -13,6 +13,7 @@ import store from './redux/store'
 import settingsPage from './pages/settingsPage/settingsPage';
 import statsPage from './pages/statsPage/statsPage';
 import AddDebtPage from './pages/AddDebtPage/AddDebtPage';
+import EditDebt from './pages/EditDebtPage/EditDebtPage';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
           <Route path = '/stats' component = {statsPage}/>
           <Route path = '/settings' component = {settingsPage}/>
           <Route exact path = '/debts/addDebt'  component= {AddDebtPage}/>
-          <Route path = '/debts/:debtId'/>
+          <Route path = '/debts/editDebt/:debtId' component= {EditDebt}/>
           <Route exact path = '/' component ={home}/>
         </Switch>
         </BrowserRouter>

@@ -6,9 +6,9 @@ export const updateDebt = (token, id) => {
     
     return axios({
       method: "PATCH",
-      url:baseUrl + "/debts/:debtID",
+      url:baseUrl + "/debts/:debtId",
       params: {
-        debtID : id
+        debtId : id
       },
       headers: {
         Authorization: "Bearer " + token,

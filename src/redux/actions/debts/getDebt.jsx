@@ -1,15 +1,13 @@
 import axios from 'axios';
 import { FETCH_DEBT, baseUrl} from '../types';
 
-export const getDebt = (token, id) => {
+export const getDebt = (id, token) => {
   return (dispatch) => {
+    console.log(id, token);
     
     return axios({
       method: "GET",
-      url:baseUrl + "/debts/:debtID",
-      params: {
-        debtID : id
-      },
+      url:baseUrl + `/debts/${id}`,
       headers: {
         Authorization: "Bearer " + token,
         type: "application/json",

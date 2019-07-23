@@ -20,7 +20,7 @@ function reducer(state = initialState,{ type, payload}) {
   case ( FETCH_DEBT ): {
     console.log('reducer' + payload);
     return {...state,
-      debts: payload.debt
+      debts:[ payload.debt]
     }
   }
   case ( ADD_DEBT ): {
