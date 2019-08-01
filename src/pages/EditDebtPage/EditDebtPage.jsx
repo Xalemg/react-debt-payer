@@ -6,16 +6,17 @@ import  DebtViewer  from '../../components/DebtViewer/DebtViewer';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useStyles from './style'
-
+import Loader from "../../components/loader/loader";
 
 
 function EditDebtPage(props) {
   const classes = useStyles();
   useEffect(() => {
+    if(!props.debt) {
     const { debtId } = props.match.params;
     console.log(debtId);
-    
-    props.getDebt(debtId, props.user.token);
+      props.getDebt(debtId, props.user.token);
+    }
   }, );
 
 
@@ -28,14 +29,15 @@ function EditDebtPage(props) {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.layout}>
-
+      {
+      props.debt ? 
       <DebtViewer
       debt = {{
-        "person": "",
-        "reason": "",
-        "amount": Number(30),
+        "person": props.debt.debtor ,
+        "reason": props.debt.reason,
+        "amount": Number(props.debt.amount),
         "description": "",
-        "payer": "",
+        "payer":  String(props.debt.amount).charAt(0),
       }}
       settings = {{
         tittle: "Add new payment",
@@ -43,7 +45,9 @@ function EditDebtPage(props) {
         commitAction: sendUpdatedDebtToServer,
       }}
       date = {new Date()}
-      />
+      /> 
+      : <Loader></Loader>
+      }
       </Container>
     </React.Fragment>
   );
@@ -51,7 +55,8 @@ function EditDebtPage(props) {
 
 const mapStateToProps = state => {
   return {
-   user: state.user
+   user: state.user,
+   debt: state.debts.debts[0],
   }
 }
 

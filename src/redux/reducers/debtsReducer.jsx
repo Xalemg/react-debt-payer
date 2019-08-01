@@ -21,6 +21,8 @@ function reducer(state = initialState,{ type, payload}) {
     console.log('reducer' + payload);
     return {...state,
       debts:[ payload.debt]
+    ,    
+    count: 1
     }
   }
   case ( ADD_DEBT ): {
