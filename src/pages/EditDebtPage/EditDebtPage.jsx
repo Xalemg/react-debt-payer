@@ -12,9 +12,8 @@ import Loader from "../../components/loader/loader";
 function EditDebtPage(props) {
   const classes = useStyles();
   useEffect(() => {
-    if(!props.debt) {
-    const { debtId } = props.match.params;
-    console.log(debtId);
+    if(props.count !== 1) {
+      const { debtId } = props.match.params;
       props.getDebt(debtId, props.user.token);
     }
   }, );
@@ -30,7 +29,7 @@ function EditDebtPage(props) {
       <CssBaseline />
       <Container className={classes.layout}>
       {
-      props.debt ? 
+      props.count === 1 ? 
       <DebtViewer
       debt = {{
         "person": props.debt.debtor ,
@@ -40,7 +39,7 @@ function EditDebtPage(props) {
         "payer":  String(props.debt.amount).charAt(0),
       }}
       settings = {{
-        tittle: "Add new payment",
+        tittle: "Edit payment",
         commitButton: "ADD",
         commitAction: sendUpdatedDebtToServer,
       }}
@@ -57,6 +56,7 @@ const mapStateToProps = state => {
   return {
    user: state.user,
    debt: state.debts.debts[0],
+   count: state.debts.count
   }
 }
 
