@@ -14,7 +14,7 @@ export const updateDebt = (id,debtor, reason, amount, description, date, token) 
         debtor,
         reason,
         amount, 
-        description, 
+        description,
         date
       },
       headers: {

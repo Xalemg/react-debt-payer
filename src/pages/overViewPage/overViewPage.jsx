@@ -13,10 +13,11 @@ import Summary from '../../components/Summary/Summary'
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Loader from '../../components/loader/loader';
-
+import OverviewChart from '../../components/overviewChart/overviewChart'
 const useStyles = makeStyles(theme => ({
 
   }));
+
 export class overViewPage extends React.Component {
 
   componentDidMount =() => {
@@ -67,8 +68,8 @@ export class overViewPage extends React.Component {
         </Grid>
         {/* Chart */}
         <Grid item xs={12} md={8} lg={9}>
-          <Paper>
-          { JSON.stringify(this.props.debts)}
+          <Paper className={classNames(classes.header)}>
+            <OverviewChart debts={this.props.debts.debts}/>
           </Paper>
         </Grid>
         {/* Recent Debts */}
@@ -80,8 +81,8 @@ export class overViewPage extends React.Component {
         </Grid>
       </Grid>
     </Container>
-     : <Loader></Loader>
-    )
+     : <Loader/>
+       )
   }
 }
 const mapStateToProps = state => {

@@ -15,6 +15,9 @@ const styles = theme => ({
         overflow: 'auto',
         flexDirection: 'column',
         textAlign :'left'
+      },
+      header: {
+       height:"230px"
       }
 })
 export default styles;
