@@ -11,17 +11,12 @@ import Loader from "../../components/loader/loader";
 
 function EditDebtPage(props) {
   const classes = useStyles();
+  const { debtId } = props.match.params;
   useEffect(() => {
     if(props.count !== 1) {
-      const { debtId } = props.match.params;
       props.getDebt(debtId, props.user.token);
     }
   }, );
-
-
-  const sendUpdatedDebtToServer = (values,token) => {    
-    this.props.addDebt(values.person, values.reason,values.amount,values.description, values.date, token)
-  }
 
   return (
 
@@ -32,16 +27,19 @@ function EditDebtPage(props) {
       props.count === 1 ? 
       <DebtViewer
       debt = {{
+        "debtId": debtId,
         "person": props.debt.debtor ,
         "reason": props.debt.reason,
         "amount": Number(props.debt.amount),
+        "date": (props.debt.date),
         "description": "",
         "payer":  String(props.debt.amount).charAt(0),
       }}
       settings = {{
         tittle: "Edit payment",
-        commitButton: "ADD",
-        commitAction: sendUpdatedDebtToServer,
+        commitButton: "UPDATE",
+        updateDebt: true,
+        addDebt: false,
       }}
       date = {new Date()}
       /> 

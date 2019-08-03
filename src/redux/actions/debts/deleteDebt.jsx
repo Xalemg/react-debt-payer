@@ -1,22 +1,24 @@
 import axios from 'axios';
 import { DELETE_DEBT, baseUrl} from '../types';
+import { listDebts } from './listDebts';
 
 export const deleteDebt = (token, id) => {
   return (dispatch) => {
     
     return axios({
       method: "DELETE",
-      url:baseUrl + "/debts/:debtID",
+      url:baseUrl +  `/debts/${id}`,
       params: {
-        debtID : id
+        debtId : id
       },
       headers: {
-        Authorization: "Bearer " + token,
         type: "application/json",
+        Authorization: "Bearer " + token
       },
      })
       .then(response => {
-        dispatch(deleteDebtSuccess(response.data))
+        dispatch(deleteDebtSuccess(response.data, id));
+        dispatch(listDebts(token));
       })
       .catch(error => {
         throw(error);
@@ -24,12 +26,13 @@ export const deleteDebt = (token, id) => {
   };
 };
 
-  export const deleteDebtSuccess = (messsage) => {
+  export const deleteDebtSuccess = (messsage,) => {
     
       return {
         type: DELETE_DEBT,
         payload: {
             messsage,
+
         }
       }
     }

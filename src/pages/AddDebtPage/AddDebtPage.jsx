@@ -11,16 +11,11 @@ import useStyles from './style'
 function AddDebtPage() {
   const classes = useStyles();
 
-  const sendDebtToServer = (values,token) => {    
-    this.props.addDebt(values.person, values.reason,values.amount,values.description, values.date, token)
-  }
-
   return (
 
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.layout}>
-
       <DebtViewer
       debt = {{
         "person": "",
@@ -32,7 +27,8 @@ function AddDebtPage() {
       settings = {{
         tittle: "Add new payment",
         commitButton: "ADD",
-        commitAction: sendDebtToServer,
+        updateDebt: false,
+        addDebt: true,
       }}
       date = {new Date()}
       />

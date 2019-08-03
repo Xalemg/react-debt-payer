@@ -5,7 +5,8 @@ const useStyles = makeStyles(theme => ({
       width: '100%',
       marginTop:"10px",
       paddingLeft: "1%",
-      paddingRight: "1%"
+      paddingRight: "1%",
+      paddingBottom: "5px"
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),

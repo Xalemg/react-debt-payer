@@ -1,18 +1,25 @@
 import axios from 'axios';
 import { UPDATE_DEBT, baseUrl} from '../types';
 
-export const updateDebt = (token, id) => {
+export const updateDebt = (id,debtor, reason, amount, description, date, token) => {
+  console.log(id,debtor, reason, amount, description, date, token);
   return (dispatch) => {
-    
     return axios({
       method: "PATCH",
-      url:baseUrl + "/debts/:debtId",
+      url:baseUrl + `/debts/${id}`,
       params: {
-        debtId : id
+        debtId: id
+      },
+      data: {
+        debtor,
+        reason,
+        amount, 
+        description, 
+        date
       },
       headers: {
-        Authorization: "Bearer " + token,
         type: "application/json",
+        Authorization: "Bearer " + token
       },
      })
       .then(response => {

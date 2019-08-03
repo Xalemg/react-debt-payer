@@ -8,6 +8,8 @@ import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pi
 import DateFnsUtils from '@date-io/date-fns';
 import {connect} from 'react-redux'
 import { addDebt } from '../../redux/actions/debts/addDebt';
+import { updateDebt } from '../../redux/actions/debts/updateDebt';
+import deleteDebtModal from '../../components/deleteDebtModal/deleteDebtModal'
 
 
 
@@ -23,13 +25,18 @@ function DebtViewer(props) {
   });
 
 
-  const sendDebtToServer = (values,token) => {    
-    props.addDebt(values.person, values.reason,values.amount,values.description, values.date, token)
+  const sendDebtToServer = (values,token) => { 
+    if(props.settings.addDebt) {
+      props.addDebt(values.person, values.reason,values.amount,values.description, values.date, token)
+    }
+    if(props.settings.updateDebt) {
+      props.updateDebt(props.debt.debtId, values.person, values.reason,values.amount,values.description, values.date, token)
+    }  
   }
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
-  const [date, handleDateChange] = React.useState(props.date);
+  const [date, handleDateChange] = React.useState(props.debt.date);
 
   return (
    
@@ -161,4 +168,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps,{addDebt}) (DebtViewer)
+export default connect(mapStateToProps,{addDebt, updateDebt}) (DebtViewer)

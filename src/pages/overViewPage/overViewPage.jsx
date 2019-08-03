@@ -12,7 +12,7 @@ import Title from '../../components/Title/Title'
 import Summary from '../../components/Summary/Summary'
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
+import Loader from '../../components/loader/loader';
 
 const useStyles = makeStyles(theme => ({
 
@@ -55,6 +55,7 @@ export class overViewPage extends React.Component {
 
     const { classes } = {...this.props, useStyles};
     return (
+      this.props.debts ? 
       <Container maxWidth="xl" >
       <Grid container spacing={3} className = {classNames(classes.container)} >
          <Grid item xs={12} md={4} lg={3}>
@@ -73,12 +74,13 @@ export class overViewPage extends React.Component {
         {/* Recent Debts */}
         <Grid item xs={12} className = {classNames(classes.debtPaper)} >
         <Title textAlign= 'left' >Recent Debts</Title>
-        {this.props.debts.debts.length > 1 ? 
+        {this.props.debts.debts.length > 0 ? 
         <DebtList debts = { this.props.debts.debts} className = {classNames(classes.debtTable)}/> :
         <Typography variant="h6" component="h1"> There's no payment yet</Typography>}
         </Grid>
       </Grid>
     </Container>
+     : <Loader></Loader>
     )
   }
 }

@@ -11,8 +11,6 @@ export const listDebts = (token) => {
         type: "application/json",
         Authorization: "Bearer " + token
       },
-      data: {
-      },
      })
       .then(response => {
         dispatch(listDebtsSuccess(response.data))

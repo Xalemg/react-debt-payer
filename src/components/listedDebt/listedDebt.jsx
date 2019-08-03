@@ -8,16 +8,22 @@ import Button from '@material-ui/core/Button';
 import * as moment from 'moment';
 import { withRouter } from "react-router-dom";
 import useStyles  from "./style";
-import {connect} from 'react-redux'
-
-const deleteDebt = (debtId) => {
-
-
-}
+import {connect} from 'react-redux';
+import DeleteDebtModal from '../../components/deleteDebtModal/deleteDebtModal';
+import {deleteDebt} from '../../redux/actions/debts/deleteDebt';
 
 const Debt =  (props) => {
   const classes = useStyles();
+  const [deleteModalOpen, setOpen] = React.useState(false);
 
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+  
   return (
     <div className={classes.root}>
       <ExpansionPanel TransitionProps={{ unmountOnExit: true }}>
@@ -44,7 +50,7 @@ const Debt =  (props) => {
           <Typography className={classes.heading}>{props.description}</Typography>
           </div>
           <div align = "right" className={classes.column}>
-          <Button size="small">DELETE</Button>
+          <Button size="small" color="secondary" onClick ={handleClickOpen} >DELETE</Button>
           <Button size="small" color="primary"    
            onClick={() => {  props.history.push(`/debts/editDebt/${props.id}`); }}>
             EDIT
@@ -52,6 +58,10 @@ const Debt =  (props) => {
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
+      <DeleteDebtModal open= {deleteModalOpen}
+        debtId = {props.id}
+        handleClickOpen ={handleClickOpen}
+        handleClose = {handleClose} />
       </div>
   );
 }

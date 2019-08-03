@@ -1,6 +1,6 @@
 import React from 'react';
 import GridList from '@material-ui/core/GridList';
-import Debt from '../Debt/Debt'
+import Debt from '../listedDebt/listedDebt'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
