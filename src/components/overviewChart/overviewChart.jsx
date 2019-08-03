@@ -1,19 +1,22 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import { height } from '@material-ui/system';
 import style from "./style.css";
 
 // Generate Sales Data
 function createData(date, amount) {
   date =  date.substring(0,10);
-
   return {date, amount };
 }
 
 
 
 export default function OverviewChart(props) {
-  let data = props.debts.map(debt => createData(debt.date,debt.amount));
+  const debts = debts.reduce( (prev, current, index) => {
+    return prev +current;
+  } );
+  let data = props.debts.map(debt => createData(debt.date,debts.reduce( (prev, current, index) => {
+    return prev +current;
+  } )));
   return (
       
     <React.Fragment>
@@ -29,7 +32,6 @@ export default function OverviewChart(props) {
         >
           <XAxis dataKey="date">
           <Label position="center" style={{ textAnchor: 'middle'}}>
-              Date
           </Label>
           </XAxis>
           <YAxis>
