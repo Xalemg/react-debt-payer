@@ -69,7 +69,9 @@ export class overViewPage extends React.Component {
         {/* Chart */}
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={classNames(classes.header)}>
-            <OverviewChart debts={this.props.debts.debts}/>
+            <OverviewChart debts={this.props.debts.debts.sort((a,b) => {
+              return a.date >b.date
+            })}/>
           </Paper>
         </Grid>
         {/* Recent Debts */}

@@ -11,12 +11,12 @@ function createData(date, amount) {
 
 
 export default function OverviewChart(props) {
-  const debts = debts.reduce( (prev, current, index) => {
-    return prev +current;
-  } );
-  let data = props.debts.map(debt => createData(debt.date,debts.reduce( (prev, current, index) => {
-    return prev +current;
-  } )));
+  let sum = 0;
+  const data = props.debts.map((debt,i,debts) =>{
+    sum = sum + debt.amount
+    return createData(debt.date, sum);
+  },sum);
+
   return (
       
     <React.Fragment>
