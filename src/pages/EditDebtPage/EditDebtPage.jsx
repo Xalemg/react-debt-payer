@@ -33,7 +33,7 @@ function EditDebtPage(props) {
         "amount": Number(props.debt.amount),
         "date": (props.debt.date),
         "description": "",
-        "payer":  String(props.debt.amount).charAt(0),
+        "payer": (props.debt.payer),
       }}
       settings = {{
         tittle: "Edit payment",
@@ -56,6 +56,7 @@ const mapStateToProps = state => {
    debt: state.debts.debts[0],
    count: state.debts.count
   }
+
 }
 
 export default connect(mapStateToProps, {updateDebt, getDebt})(EditDebtPage)

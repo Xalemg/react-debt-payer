@@ -5,7 +5,7 @@ import {
   baseUrl
 } from '../types';
 
-export const addDebt = (debtor, reason, amount, description, date, token) => {
+export const addDebt = (debtor, reason, payer, amount, description, date, token) => {
   return (dispatch) => {
     
     return axios({
@@ -17,6 +17,7 @@ export const addDebt = (debtor, reason, amount, description, date, token) => {
         },
         data: {
           debtor,
+          payer,
           reason,
           amount,
           description,

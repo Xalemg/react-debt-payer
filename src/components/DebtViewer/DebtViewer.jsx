@@ -16,24 +16,27 @@ import deleteDebtModal from '../../components/deleteDebtModal/deleteDebtModal'
 
 function DebtViewer(props) {
   const classes = useStyles();
+  console.log("props.debt.payer " + props.debt.payer);
+  
   const [values, setValues] = React.useState({
     person: props.debt.person,
     reason:props.debt.reason,
     amount: props.debt.amount,
     description:props.debt.description,
-    payer:props.debt.description,
+    payer:""+props.debt.payer,
   });
 
 
   const sendDebtToServer = (values,token) => { 
     if(props.settings.addDebt) {
-      props.addDebt(values.person, values.reason,values.amount,values.description, values.date, token)
+      props.addDebt(values.person, values.reason, values.payer,values.amount,values.description, values.date, token)
     }
     if(props.settings.updateDebt) {
-      props.updateDebt(props.debt.debtId, values.person, values.reason,values.amount,values.description, values.date, token)
+      props.updateDebt(props.debt.debtId, values.person, values.payer, values.reason,values.amount,values.description, values.date, token)
     }  
   }
   const handleChange = name => event => {
+    console.log(name);
     setValues({ ...values, [name]: event.target.value });
   };
   const [date, handleDateChange] = React.useState(props.debt.date);
@@ -112,8 +115,8 @@ function DebtViewer(props) {
           value={values.payer}
           onChange={handleChange('payer')}
         >
-          <FormControlLabel value="negative" control={<Radio   color="primary"/>} label="I got paid" />
-          <FormControlLabel value="positive" control={<Radio />}  label="I paid" />
+          <FormControlLabel value="false" control={<Radio color="primary"/>} label="I got paid" />
+          <FormControlLabel value="true" control={<Radio />}  label="I paid" />
         </RadioGroup>
         </Grid>
         <Grid item xs={12} sm={6} className={classes.textField}>

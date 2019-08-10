@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { UPDATE_DEBT, baseUrl} from '../types';
 
-export const updateDebt = (id,debtor, reason, amount, description, date, token) => {
+export const updateDebt = (id,debtor, payer, reason, amount, description, date, token) => {
   console.log(id,debtor, reason, amount, description, date, token);
   return (dispatch) => {
     return axios({
@@ -12,6 +12,7 @@ export const updateDebt = (id,debtor, reason, amount, description, date, token) 
       },
       data: {
         debtor,
+        payer,
         reason,
         amount, 
         description,
