@@ -3,6 +3,7 @@ export const baseUrl = 'https://deduas-api.herokuapp.com';
 
 //Ususarios
 export const LOGIN = 'LOGIN';
+export const GET_INFO = 'GET_INFO';
 export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
 export const  UPDATE_USER = 'UPDATE_USER';
