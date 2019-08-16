@@ -5,6 +5,8 @@ export const baseUrl = 'https://deduas-api.herokuapp.com';
 export const LOGIN = 'LOGIN';
 export const GET_INFO = 'GET_INFO';
 export const LOGOUT = 'LOGOUT';
+export const ADD_FRIEND = 'ADD_FRIEND';
+export const DELETE_FRIEND = 'DELETE_FRIEND';
 export const REGISTER = 'REGISTER';
 export const  UPDATE_USER = 'UPDATE_USER';
 
