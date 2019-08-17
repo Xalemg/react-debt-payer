@@ -14,6 +14,7 @@ export const getUserInfo = (user, token) => {
         }
        })
         .then(response => {
+          console.log(response.data);
           dispatch(infoSuccess(response.data));
         })
         .catch(error => {
@@ -23,14 +24,10 @@ export const getUserInfo = (user, token) => {
     };
   };
   
-  export const infoSuccess = ({message, token, id, image, name, friends}) => {
-    console.log("message " + JSON.stringify(message));
-    
+  export const infoSuccess = ({email, id, image, name, friends}) => {    
       return {
         type: GET_INFO,
         payload: {
-            message,
-            token,
             id,
             image,
             name,

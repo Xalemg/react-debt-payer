@@ -26,14 +26,17 @@ function EditDebtPage(props) {
       {
       props.count === 1 ? 
       <DebtViewer
+      includeDelete= {true}
       debt = {{
         "debtId": debtId,
         "person": props.debt.debtor ,
         "reason": props.debt.reason,
+        "userId": props.debt.user_id,
+        "debtorId": props.debt.debtor_id,
         "amount": Number(props.debt.amount),
         "date": (props.debt.date),
         "description": "",
-        "payer": (props.debt.payer),
+        "payer": ("" + props.debt.userId!==props.user.id),
       }}
       settings = {{
         tittle: "Edit payment",
@@ -51,6 +54,7 @@ function EditDebtPage(props) {
 }
 
 const mapStateToProps = state => {
+
   return {
    user: state.user,
    debt: state.debts.debts[0],

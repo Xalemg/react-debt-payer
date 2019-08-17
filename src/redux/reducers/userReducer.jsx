@@ -10,7 +10,7 @@ const initialState = {
   name: null,
   friends: null,
   //token: null,
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InhhbGVtZ0BnbWFpbC5jb20iLCJ1c2VySWQiOiI1Y2ZjZDk1Yjc0OTdiOTAwMTQwNWMzNGIiLCJpYXQiOjE1NjA1MjUwNDN9.1Du9S1A0VX-6lney8db_TjVgogX61ok2EI440iIC3qs'
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InhhbGVtZ0BnbWFpbC5jb20iLCJ1c2VySWQiOiI1Y2ZjZDk1Yjc0OTdiOTAwMTQwNWMzNGIiLCJpYXQiOjE1NjAwNzcwNzd9.UR5wKCh-PZKNEn2XpDLafHLT4n03vyadD5dDwuBZ6WM'
 };
 
  function reducer(state = initialState, {
@@ -35,10 +35,8 @@ const initialState = {
         console.log(payload);
         
         return { ...state,
-          message: payload.message,
           online: payload.online,
           id: payload.id,
-          token: payload.token,
           image: payload.image,
           name: payload.name,
           friends: payload.friends

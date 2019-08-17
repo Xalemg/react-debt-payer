@@ -28,7 +28,7 @@ export class overViewPage extends React.Component {
 
   getTotalDebt = (debts) => {
 
-    if ( debts.length > 0 ) {
+    if ( debts.length >= 1 ) {
       const amounts = debts.map( (debt) => {
         return debt.amount;
       });          
@@ -39,6 +39,7 @@ export class overViewPage extends React.Component {
   }
 
   getLastDate = (debts) => {
+    console.log(this.props.user);
     
     if (debts.length > 0) {
      const dates = debts.map( (debt) => {
@@ -77,8 +78,8 @@ export class overViewPage extends React.Component {
         {/* Recent Debts */}
         <Grid item xs={12} className = {classNames(classes.debtPaper)} >
         <Title textAlign= 'left' >Recent Debts</Title>
-        {this.props.debts.debts.length > 0 ? 
-        <DebtList debts = { this.props.debts.debts} className = {classNames(classes.debtTable)}/> :
+        {this.props.debts.debts.length >= 1 ? 
+        <DebtList debts = { this.props.debts.debts} user={this.props.user} className = {classNames(classes.debtTable)}/> :
         <Typography variant="h6" component="h1"> There's no payment yet</Typography>}
         </Grid>
       </Grid>

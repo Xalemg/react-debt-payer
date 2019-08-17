@@ -10,8 +10,9 @@ import {connect} from 'react-redux'
 import { addDebt } from '../../redux/actions/debts/addDebt';
 import { updateDebt } from '../../redux/actions/debts/updateDebt';
 import { getUserInfo } from '../../redux/actions/users/getUserInfo';
-import deleteDebtModal from '../../components/deleteDebtModal/deleteDebtModal'
+import DeleteDebtModal from '../../components/deleteDebtModal/deleteDebtModal'
 import Checkbox from '@material-ui/core/Checkbox';
+import {deleteDebt} from '../../redux/actions/debts/deleteDebt';
 
 
 
@@ -26,18 +27,68 @@ function DebtViewer(props) {
     reason:props.debt.reason,
     amount: props.debt.amount,
     description:props.debt.description,
-    payer:props.debt.payer,
+    payer:"" +(props.debt.userId===props.user.id),
   });
+  const [deleteModalOpen, setOpen] = React.useState(false);
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
   useEffect(() => {
-    console.log(props.user.email);
-    if(props.user.friends === null) {
+    if(!props.user.email === null) {
       props.getUserInfo(props.user.email, props.user.token);
     } 
   }, );
+  
+const handleDeleteIcon = (includeDelete) => { 
+ if (includeDelete) {
+   return (
+  <>
+  <Grid item xs={12} sm={4}>
+    <Button className={classes.button} color="secondary" onClick ={handleClickOpen} >DELETE</Button>
+    </Grid>
+    <Grid item xs={12} sm={4}>
+    <Button color="secondary" variant="outlined" className={classes.button} onClick={() => props.history ? props.history.goBack() :null}>
+    Cancel
+    </Button>
+    </Grid>
+    <Grid item xs={12} sm={4}>
+    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user)}>
+    {props.settings.commitButton}
+    </Button>
+    </Grid>
+    <DeleteDebtModal open= {deleteModalOpen}
+        debtId = {props.debt.debtId}
+        goBack ={true}
+        handleClickOpen ={handleClickOpen}
+        handleClose = {handleClose} />
+    </>
+   )} else {
+     console.log(props);
+     
+   return (
+     <>
+    <Grid item xs={12} sm={6}>
+    <Button color="secondary" variant="outlined" className={classes.button} onClick={() => props.history.goBack()}>
+    Cancel
+    </Button>
+    </Grid>
+    <Grid item xs={12} sm={6}>
+    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user)}>
+    {props.settings.commitButton}
+  </Button>
+    </Grid>
+    
+    </>
+   )}
+} 
 
 
   const sendDebtToServer = (values,user) => { 
-    console.log(values.debtorIsFriend);
     let userId, debtorId;
     if(values.payer === "true") {
       userId = user.id;
@@ -55,7 +106,6 @@ function DebtViewer(props) {
     }  
   }
   const handleChange = name => event => {
-    console.log(values.debtorIsFriend);
     if(name === "debtorIsFriend") {
       setValues({ ...values, [name]: event.target.checked  });
     } else{
@@ -182,16 +232,7 @@ function DebtViewer(props) {
       </MuiPickersUtilsProvider>
         </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-        <Button color="secondary" variant="outlined" className={classes.button} onClick={() => props.history.goBack()}>
-        Cancel
-        </Button>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user)}>
-        {props.settings.commitButton}
-      </Button>
-        </Grid>
+        {handleDeleteIcon(props.includeDelete)}
       </Grid>
     </React.Fragment>
         </Paper>
@@ -203,4 +244,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps,{addDebt, updateDebt, getUserInfo}) (DebtViewer)
+export default connect(mapStateToProps,{addDebt, updateDebt, getUserInfo, deleteDebt}) (DebtViewer)

@@ -24,14 +24,15 @@ const Debt =  (props) => {
     setOpen(false);
   }
 
-  function handleNegativeValues (amount, payer) {
-    return payer ? Number(-amount) : Number(amount);
+  function handleNegativeValues (amount) {
+    return props.userId!==props.user ? Number(-amount) : Number(amount);
   }
+  console.log( props.userId);
   
   return (
     <div className={classes.root}>
       <ExpansionPanel TransitionProps={{ unmountOnExit: true }}
-      className ={ props.payer ? classes.red : classes.green}>
+      className ={ props.userId!==props.user ? classes.red : classes.green}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1c-content"
@@ -44,7 +45,7 @@ const Debt =  (props) => {
             <Typography className={classes.heading}>{props.debtor}</Typography>
           </div>
           <div className={classes.column}>
-          <Typography align= "right" className={classes.heading}>{handleNegativeValues(props.amount, props.payer)}€</Typography>
+          <Typography align= "right" className={classes.heading}>{handleNegativeValues(props.amount)}€</Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
