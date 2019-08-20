@@ -24,6 +24,7 @@ function DebtViewer(props) {
     person: props.debt.person,
     personId: props.debt.personId,
     debtorIsFriend: false,
+    payed:  props.debt.payed,
     reason:props.debt.reason,
     amount: props.debt.amount,
     description:props.debt.description,
@@ -99,16 +100,20 @@ const handleDeleteIcon = (includeDelete) => {
     }
 
     if(props.settings.addDebt) {
-      props.addDebt(userId, debtorId,values.person, values.reason, values.payer,values.amount,values.description, values.date, user.token)
+      props.addDebt(userId, debtorId,values.person, values.reason, values.payer,values.amount,values.description, values.date, values.payed, user.token)
     }
     if(props.settings.updateDebt) {
-      props.updateDebt(userId, debtorId, props.debt.debtId, values.person, values.payer, values.reason,values.amount,values.description, values.date, user.token)
+      props.updateDebt(userId, debtorId, props.debt.debtId, values.person, values.payer, values.reason,values.amount,values.description, values.date, values.payed, user.token)
     }  
   }
   const handleChange = name => event => {
     if(name === "debtorIsFriend") {
       setValues({ ...values, [name]: event.target.checked  });
-    } else{
+    }
+    else if(name === "payed") {
+      setValues({ ...values, [name]: event.target.checked  });
+    }
+     else{
       setValues({ ...values, [name]: event.target.value });
     }
   };
@@ -231,6 +236,15 @@ const handleDeleteIcon = (includeDelete) => {
         />
       </MuiPickersUtilsProvider>
         </Grid>
+          <Grid item xs={3} style ={{paddingLeft:"0px",paddingRight:"0px"}}>
+            <FormControlLabel 
+            className={classes.checkBox}
+            control={
+              <Checkbox checked={values.payed} onChange={handleChange('payed')} value="payed" />
+            }
+            label="Already payed"
+          />
+          </Grid>
         </Grid>
         {handleDeleteIcon(props.includeDelete)}
       </Grid>

@@ -32,6 +32,7 @@ function EditDebtPage(props) {
         "person": props.debt.debtor ,
         "reason": props.debt.reason,
         "userId": props.debt.user_id,
+        "payed": props.debt.payed,
         "debtorId": props.debt.debtor_id,
         "amount": Number(props.debt.amount),
         "date": (props.debt.date),

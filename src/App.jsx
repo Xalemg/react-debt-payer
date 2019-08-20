@@ -14,6 +14,7 @@ import settingsPage from './pages/settingsPage/settingsPage';
 import statsPage from './pages/statsPage/statsPage';
 import AddDebtPage from './pages/AddDebtPage/AddDebtPage';
 import EditDebt from './pages/EditDebtPage/EditDebtPage';
+import friendsPage from './pages/friendsPage/friendsPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path = '/own' component = {ownPage}/>
           <Route path = '/owned' component = {ownedPage}/>
           <Route path = '/stats' component = {statsPage}/>
+          <Route path = '/friends' component = {friendsPage}/>
           <Route path = '/settings' component = {settingsPage}/>
           <Route exact path = '/debts/addDebt'  component= {AddDebtPage}/>
           <Route path = '/debts/editDebt/:debtId' component= {EditDebt}/>

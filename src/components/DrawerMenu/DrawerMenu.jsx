@@ -148,14 +148,20 @@ class DrawerMenu extends React.Component {
               <ListItemIcon><Stats/></ListItemIcon>
               <ListItemText primary='Stats' />
           </ListItem>
-          </Link>  
+          </Link>
+          <Link to = 'friends' style = {{textDecoration: "none"}}>
+          <ListItem button key={'Friends'} >
+            <ListItemIcon><SettingsIcon/></ListItemIcon>
+              <ListItemText primary='Friends' />
+          </ListItem>
+          </Link>
           </List>
           <Divider />
           <List>
-          <Link to = 'settings' style = {{textDecoration: "none"}}>
-          <ListItem button key={'Settings'} >
+          <Link to = 'friends' style = {{textDecoration: "none"}}>
+          <ListItem button key={'Friends'} >
             <ListItemIcon><SettingsIcon/></ListItemIcon>
-              <ListItemText primary='Settings' />
+              <ListItemText primary='Friends' />
           </ListItem>
           </Link>
           <Link to = 'stats' style = {{display: "none"}}>

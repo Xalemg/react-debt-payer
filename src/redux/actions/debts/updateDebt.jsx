@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { UPDATE_DEBT, baseUrl} from '../types';
 
-export const updateDebt = (userId, debtorId, id,debtor, payer, reason, amount, description, date, token) => {
-  console.log(userId, debtorId, id,debtor, payer, reason, amount, description, date, token);
+export const updateDebt = (userId, debtorId, id,debtor, payer, reason, amount, description, date, payed, token) => {
   return (dispatch) => {
     return axios({
       method: "PATCH",
@@ -16,7 +15,8 @@ export const updateDebt = (userId, debtorId, id,debtor, payer, reason, amount, d
         debtor,
         payer,
         reason,
-        amount, 
+        amount,
+        payed,
         description,
         date
       },

@@ -8,9 +8,7 @@ const goBack =(props) => {
     }
       else {
         return props.history.push('/');
-        
       } 
-
 };
 
 export default  goBack;
