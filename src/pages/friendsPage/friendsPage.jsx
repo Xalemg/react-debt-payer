@@ -12,4 +12,4 @@ export class friendsPage extends Component {
   }
 }
 
-export default friendsPage
+export default  friendsPage

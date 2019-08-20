@@ -1,4 +1,4 @@
-import React, {useState}  from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -10,7 +10,6 @@ import {connect} from 'react-redux'
 import { deleteDebt } from '../../redux/actions/debts/deleteDebt';
 import {listDebts} from '../../redux/actions/debts/listDebts';
 import history from  '../auxiliar/history/history';
-import { Redirect } from 'react-router'
 
 
 

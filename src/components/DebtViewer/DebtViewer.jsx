@@ -12,6 +12,7 @@ import { updateDebt } from '../../redux/actions/debts/updateDebt';
 import { getUserInfo } from '../../redux/actions/users/getUserInfo';
 import DeleteDebtModal from '../../components/deleteDebtModal/deleteDebtModal'
 import Checkbox from '@material-ui/core/Checkbox';
+import FriendSelector from '../../components/friendSelector/friendSelector';
 import {deleteDebt} from '../../redux/actions/debts/deleteDebt';
 
 
@@ -40,10 +41,11 @@ function DebtViewer(props) {
     setOpen(false);
   }
   useEffect(() => {
-    if(!props.user.email === null) {
+    console.log("·");
+    
       props.getUserInfo(props.user.email, props.user.token);
-    } 
-  }, );
+     
+  },[] );
   
 const handleDeleteIcon = (includeDelete) => { 
  if (includeDelete) {
@@ -106,7 +108,8 @@ const handleDeleteIcon = (includeDelete) => {
       props.updateDebt(userId, debtorId, props.debt.debtId, values.person, values.payer, values.reason,values.amount,values.description, values.date, values.payed, user.token)
     }  
   }
-  const handleChange = name => event => {
+  const handleChange = name => (event) => {
+    
     if(name === "debtorIsFriend") {
       setValues({ ...values, [name]: event.target.checked  });
     }
@@ -117,8 +120,14 @@ const handleDeleteIcon = (includeDelete) => {
       setValues({ ...values, [name]: event.target.value });
     }
   };
-  const [date, handleDateChange] = React.useState(props.debt.date);
+const handleFriendSelect = (value) => {
+  console.log(value);
+  
+  setValues({ ...values, 'personId': value });
+}
 
+  const [date, handleDateChange] = React.useState(props.debt.date);
+  
   return (
    
         <Paper className={classes.paper}>
@@ -138,6 +147,7 @@ const handleDeleteIcon = (includeDelete) => {
         />
         </Grid>
         <Grid item xs={9} style ={{paddingLeft:"0px"}}>
+          {!values.debtorIsFriend ?
           <TextField
             required
             id="personName"
@@ -147,8 +157,8 @@ const handleDeleteIcon = (includeDelete) => {
             label="Person"
             fullWidth
             autoComplete="fname"
-          />
-        </Grid>
+          />: <FriendSelector handler = {handleFriendSelect} personId={values.personId} friends = {props.user.friends}/>}
+        </Grid> 
         <Grid item xs={12} sm={6}>
           <TextField
             required

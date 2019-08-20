@@ -8,7 +8,7 @@ const initialState = {
   //email: null,
   avatar: null,
   name: null,
-  friends: null,
+  friends: [],
   //token: null,
   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InhhbGVtZ0BnbWFpbC5jb20iLCJ1c2VySWQiOiI1Y2ZjZDk1Yjc0OTdiOTAwMTQwNWMzNGIiLCJpYXQiOjE1NjAwNzcwNzd9.UR5wKCh-PZKNEn2XpDLafHLT4n03vyadD5dDwuBZ6WM'
 };
