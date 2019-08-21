@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -18,16 +16,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
- function FriendSelector (props) {
-     console.log(props);
-     
+ function FriendSelector ({personId, friends,initialPerson, handler}) {
+const person = {...friends.filter( (friend) => friend._id === initialPerson)[0]};
+console.log(person.email);
     const classes = useStyles();
+    const [value, setValues] = React.useState(
+      {
+        email: '',
+        _id: '',
+      });  
 
-    const [values, setValues] = React.useState(props.friends);
-  
-    const inputLabel = React.useRef(null);
-  
+      React.useEffect(() => {
+          setValues(person);
+      }, [person.email]);
     function handleChange(event) {
+      
+      handler(event.target.value);
       setValues(oldValues => ({
         ...oldValues,
         [event.target.name]: event.target.value,
@@ -35,23 +39,23 @@ const useStyles = makeStyles(theme => ({
     }
     return (
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="email-helper">Email</InputLabel>
+          <InputLabel htmlFor="email-helper">Email:</InputLabel>
           <Select
-            value={props.friends}
+            onChange={handleChange}
+            value={value._id}
             inputProps={{
               name: 'email',
-              id: 'id',
+              id: '_id',
             }}
           >
-          >
-            <MenuItem value="">
+            <MenuItem value={""}>
               <em>None</em>
             </MenuItem>
-            { props.friends.map( (friend) => {
-                 return <MenuItem key={friend.email} value={friend.id} onClick = { () =>handleChange(friend.email,friend.id)}>{friend.email}</MenuItem>
+            { friends.map( (friend) => {
+              console.log(friend);
+                 return <MenuItem key={friend.email} value={friend._id}>{friend.email}</MenuItem>
             }) }
           </Select>
-          <FormHelperText>Some important helper text</FormHelperText>
         </FormControl>
     );
   }

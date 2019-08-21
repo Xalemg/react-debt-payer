@@ -16,15 +16,16 @@ import FriendSelector from '../../components/friendSelector/friendSelector';
 import {deleteDebt} from '../../redux/actions/debts/deleteDebt';
 
 
-
-
 function DebtViewer(props) {
   const classes = useStyles();
-  
+  console.log(props.debt.userId === props.user.id);
+
   const [values, setValues] = React.useState({
     person: props.debt.person,
-    personId: props.debt.personId,
-    debtorIsFriend: false,
+    personId: props.debt.userId === props.user.id ? props.debt.debtorId :  props.debt.userId,
+    debtorIsFriend: 
+    (props.debt.debtorId !==null && props.debt.debtorId !==undefined && props.debt.debtorId !=="") 
+    && (props.debt.userId !==null && props.debt.userId !==undefined && props.debt.userId !==""),
     payed:  props.debt.payed,
     reason:props.debt.reason,
     amount: props.debt.amount,
@@ -40,9 +41,7 @@ function DebtViewer(props) {
   function handleClose() {
     setOpen(false);
   }
-  useEffect(() => {
-    console.log("·");
-    
+  useEffect(() => {   
       props.getUserInfo(props.user.email, props.user.token);
      
   },[] );
@@ -121,7 +120,7 @@ const handleDeleteIcon = (includeDelete) => {
     }
   };
 const handleFriendSelect = (value) => {
-  console.log(value);
+  console.log(' entro en la llamada con valor' + value);
   
   setValues({ ...values, 'personId': value });
 }
@@ -157,7 +156,7 @@ const handleFriendSelect = (value) => {
             label="Person"
             fullWidth
             autoComplete="fname"
-          />: <FriendSelector handler = {handleFriendSelect} personId={values.personId} friends = {props.user.friends}/>}
+          />: <FriendSelector handler = {handleFriendSelect} initialPerson={values.personId} friends = {props.user.friends}/>}
         </Grid> 
         <Grid item xs={12} sm={6}>
           <TextField
