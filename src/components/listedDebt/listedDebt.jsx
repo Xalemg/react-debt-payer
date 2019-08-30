@@ -32,8 +32,9 @@ const Debt =  (props) => {
   return (
     <div className={classes.root}>
       <ExpansionPanel TransitionProps={{ unmountOnExit: true }}
-      className ={ props.userId!==props.user ? classes.red : classes.green}>
+      >
         <ExpansionPanelSummary
+        className ={ props.userId!==props.user ? classes.red : classes.green}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1c-content"
           id="panel1c-header"

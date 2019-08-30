@@ -12,14 +12,11 @@ const useStyles = makeStyles(theme => ({
     green: {
       backgroundColor: green[100],
       '&:hover': {
-        backgroundColor:  green[200],
+        backgroundColor:  green[100],
       },
     },
     red: {
       backgroundColor:  red[100],
-      '&:hover': {
-        backgroundColor: red[200],
-      },
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -44,6 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
       margin: '1%',
+      backgroundColor: 'white',
     },
     helper: {
       borderLeft: `2px solid ${theme.palette.divider}`,

@@ -6,8 +6,6 @@ import home from "./pages/home/home";
 import loginPage from "./pages/LogInPage/LogInPage";
 import signUpPage from "./pages/signUpPage/signUpPage";
 import overViewPage from "./pages/overViewPage/overViewPage";
-import ownPage from "./pages/ownPage/ownPage";
-import ownedPage from "./pages/ownedPage/ownedPage";
 import { Provider } from 'react-redux';
 import store from './redux/store'
 import settingsPage from './pages/settingsPage/settingsPage';
