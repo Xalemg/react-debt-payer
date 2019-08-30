@@ -16,7 +16,7 @@ function EditDebtPage(props) {
     if(props.count !== 1) {
       props.getDebt(debtId, props.user.token);
     }
-  }, );
+  }, []);
 
   return (
 

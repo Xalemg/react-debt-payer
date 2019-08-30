@@ -101,10 +101,10 @@ const handleDeleteIcon = (includeDelete) => {
     }
 
     if(props.settings.addDebt) {
-      props.addDebt(userId, debtorId,values.person, values.reason, values.payer,values.amount,values.description, values.date, values.payed, user.token)
+      props.addDebt(userId, debtorId, values.debtorIsFriend===false ? values.person : null, values.reason, values.payer,values.amount,values.description, values.date, values.payed, user.token)
     }
     if(props.settings.updateDebt) {
-      props.updateDebt(userId, debtorId, props.debt.debtId, values.person, values.payer, values.reason,values.amount,values.description, values.date, values.payed, user.token)
+      props.updateDebt(userId, debtorId, props.debt.debtId, values.debtorIsFriend===false ? values.person : null, values.payer, values.reason,values.amount,values.description, values.date, values.payed, user.token)
     }  
   }
   const handleChange = name => (event) => {
@@ -120,8 +120,8 @@ const handleDeleteIcon = (includeDelete) => {
     }
   };
 const handleFriendSelect = (value) => {
-  console.log(' entro en la llamada con valor' + value);
   
+  setValues({ ...values, 'person': null });
   setValues({ ...values, 'personId': value });
 }
 

@@ -22,18 +22,16 @@ function App() {
       <div className="App">
         <BrowserRouter>
         <Switch>
-          <Route path = '/logIn' component ={loginPage}/>
-          <Route path = '/signUp' component = {signUpPage}/>
-          <Route path = '/home' component ={home}/>
+          <Route exact path = '/logIn' component ={loginPage}/>
+          <Route exact path = '/signUp' component = {signUpPage}/>
+          <Route exact path = '/home' component ={home}/>
           <DrawerMenu/>
         </Switch>
         <Switch>
-          <Route path = '/overview' component ={overViewPage}/>
-          <Route path = '/own' component = {ownPage}/>
-          <Route path = '/owned' component = {ownedPage}/>
-          <Route path = '/stats' component = {statsPage}/>
-          <Route path = '/friends' component = {friendsPage}/>
-          <Route path = '/settings' component = {settingsPage}/>
+          <Route exact path = '/overview' component ={overViewPage}/>
+          <Route exact path = '/stats' component = {statsPage}/>
+          <Route exact path = '/friends' component = {friendsPage}/>
+          <Route exact path = '/settings' component = {settingsPage}/>
           <Route exact path = '/debts/addDebt'  component= {AddDebtPage}/>
           <Route path = '/debts/editDebt/:debtId' component= {EditDebt}/>
           <Route exact path = '/' component ={home}/>
