@@ -22,7 +22,7 @@ export class overViewPage extends React.Component {
 
   componentDidMount =() => {
 
-      this.props.listDebts(this.props.user.token)
+      this.props.listDebts(this.props.user.token);
 
   }
 

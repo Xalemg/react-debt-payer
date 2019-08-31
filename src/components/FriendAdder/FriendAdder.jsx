@@ -24,7 +24,7 @@ export const FriendAdder = (props) => {
         label="Friend code"
         variant="outlined"
         style={{ margin:'10px 5px', width:' 82% '}}
-        placeholder="5cfcd95b7497b9001405c34b "
+        placeholder="Example: 5cfcd95b7497b90d1405334b "
         />
         <IconButton style={{margin:'15px 0 0 5px'}} color="primary"  ><PersonAddIcon /> </IconButton>
     </React.Fragment>
