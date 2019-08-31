@@ -33,11 +33,12 @@ const FriendsPage = (props) => {
         <Grid container
           spacing={3}
           direction="row"
-          justify="center"
-          alignItems="center"
+          justify="space-between"
+          direction = "row"
+          alignItems="stretch"
           className={classNames(classes.container)} >
          
-          <Grid item xl={8} xm={8} lg={8} xs={12}>
+          <Grid item xl={8} xm={8} lg={8} xs={12 } >
             <Paper>
               <FriendAdder userId={props.user.id} />
             </Paper>
