@@ -18,20 +18,19 @@ import Title from '../../components/Title/Title';
 
 
 
-const FriendsPage = (props) => {
+const FriendsPage = ({user, debts, getUserInfo, listDebts, classes}) => {
 
   useEffect(() => {
-    props.getUserInfo(props.user.email, props.user.token);
-    props.listDebts(props.user.token);
-
+    getUserInfo(user.email, user.token);
+    listDebts(user.token);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { classes } = { ...props };
 
   return (
 
 
-    props.user ?
+    user ?
       <Container maxWidth="xl" className={classNames(classes.friendPage)}>
         <Grid container
           spacing={3}
@@ -42,12 +41,12 @@ const FriendsPage = (props) => {
          
           <Grid item xl={8} xm={8} lg={8} xs={12 }  >
             <Paper  className={ classNames(classes.header)}>
-              <FriendAdder userId={props.user.id} />
+              <FriendAdder userId={user.id} />
             </Paper>
           </Grid>
           <Grid item xl={4} xm={4} lg={4} xs={12}>
             <Paper  className={ classNames(classes.header)}>
-              <CodeDisplayer userId={props.user.id} />
+              <CodeDisplayer userId={user.id} />
             </Paper>
           </Grid>
           <Grid item xs={12} >
@@ -61,14 +60,14 @@ const FriendsPage = (props) => {
             alignItems="flex-start"
             >
               <Grid xs={12} item>
-              <Title>You have { props.user ? ` ${props.user.friends.length} friend`  :" 0 friends "} </Title>
+              <Title>You have { user ? ` ${user.friends.length} friend`  :" 0 friends "} </Title>
               </Grid>
-              { props.user ? props.user.friends.map(friend => 
+              { user ? user.friends.map(friend => 
                 (<Grid item key = {friend._id}>
                   <FriendCard email= {friend.email}
                    id = {friend._id}
-                   userId = {props.user.id}
-                   debts={props.debts.filter( (debt) => debt.debtorId === friend._id || debt.userId === friend._id ? debt : null )} 
+                   userId = {user.id}
+                   debts={debts.filter( (debt) => debt.debtorId === friend._id || debt.userId === friend._id ? debt : null )} 
                    name= {friend.name}
                    ></FriendCard>
                    </Grid>)
