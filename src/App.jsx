@@ -6,14 +6,13 @@ import home from "./pages/home/home";
 import loginPage from "./pages/LogInPage/LogInPage";
 import signUpPage from "./pages/signUpPage/signUpPage";
 import overViewPage from "./pages/overViewPage/overViewPage";
-import ownPage from "./pages/ownPage/ownPage";
-import ownedPage from "./pages/ownedPage/ownedPage";
 import { Provider } from 'react-redux';
 import store from './redux/store'
 import settingsPage from './pages/settingsPage/settingsPage';
 import statsPage from './pages/statsPage/statsPage';
 import AddDebtPage from './pages/AddDebtPage/AddDebtPage';
 import EditDebt from './pages/EditDebtPage/EditDebtPage';
+import friendsPage from './pages/friendsPage/friendsPage';
 
 function App() {
   return (
@@ -21,17 +20,16 @@ function App() {
       <div className="App">
         <BrowserRouter>
         <Switch>
-          <Route path = '/logIn' component ={loginPage}/>
-          <Route path = '/signUp' component = {signUpPage}/>
-          <Route path = '/home' component ={home}/>
+          <Route exact path = '/logIn' component ={loginPage}/>
+          <Route exact path = '/signUp' component = {signUpPage}/>
+          <Route exact path = '/home' component ={home}/>
           <DrawerMenu/>
         </Switch>
         <Switch>
-          <Route path = '/overview' component ={overViewPage}/>
-          <Route path = '/own' component = {ownPage}/>
-          <Route path = '/owned' component = {ownedPage}/>
-          <Route path = '/stats' component = {statsPage}/>
-          <Route path = '/settings' component = {settingsPage}/>
+          <Route exact path = '/overview' component ={overViewPage}/>
+          <Route exact path = '/stats' component = {statsPage}/>
+          <Route exact path = '/friends' component = {friendsPage}/>
+          <Route exact path = '/settings' component = {settingsPage}/>
           <Route exact path = '/debts/addDebt'  component= {AddDebtPage}/>
           <Route path = '/debts/editDebt/:debtId' component= {EditDebt}/>
           <Route exact path = '/' component ={home}/>

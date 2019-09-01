@@ -16,7 +16,7 @@ function EditDebtPage(props) {
     if(props.count !== 1) {
       props.getDebt(debtId, props.user.token);
     }
-  }, );
+  }, []);
 
   return (
 
@@ -26,14 +26,18 @@ function EditDebtPage(props) {
       {
       props.count === 1 ? 
       <DebtViewer
+      includeDelete= {true}
       debt = {{
         "debtId": debtId,
         "person": props.debt.debtor ,
         "reason": props.debt.reason,
+        "userId": props.debt.user_id,
+        "payed": props.debt.payed,
+        "debtorId": props.debt.debtor_id,
         "amount": Number(props.debt.amount),
         "date": (props.debt.date),
         "description": "",
-        "payer":  String(props.debt.amount).charAt(0),
+        "payer": ("" + props.debt.userId!==props.user.id),
       }}
       settings = {{
         tittle: "Edit payment",
@@ -51,11 +55,13 @@ function EditDebtPage(props) {
 }
 
 const mapStateToProps = state => {
+
   return {
    user: state.user,
    debt: state.debts.debts[0],
    count: state.debts.count
   }
+
 }
 
 export default connect(mapStateToProps, {updateDebt, getDebt})(EditDebtPage)

@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { green, red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -7,6 +8,15 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: "1%",
       paddingRight: "1%",
       paddingBottom: "5px"
+    },
+    green: {
+      backgroundColor: green[100],
+      '&:hover': {
+        backgroundColor:  green[100],
+      },
+    },
+    red: {
+      backgroundColor:  red[100],
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -25,6 +35,13 @@ const useStyles = makeStyles(theme => ({
     },
     column: {
       flexBasis: '33.33%',
+    },
+    buttons_box: {
+      flexBasis: '66.66%',
+    },
+    button: {
+      margin: '1%',
+      backgroundColor: 'white',
     },
     helper: {
       borderLeft: `2px solid ${theme.palette.divider}`,

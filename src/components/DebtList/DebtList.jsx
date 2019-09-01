@@ -12,19 +12,18 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-evenly',
     flexDirection: "column",
   },
-  debt : {
-   marginTop: "50px" 
-  }
+
 }));
 
 export default function DebtTable(props) {
 
   const classes = useStyles();
-
+  console.log(props.user.id);
+  
   return (
     <GridList cols = {1} className={classes.gridList}>
      { props.debts.map(debt => 
-    <Debt className={classes.debt} debtor ={debt.debtor} description = {debt.description} amount =  {debt.amount} reason ={debt.reason} id ={debt._id} date =  {debt.date} key = {debt._id}></Debt>
+    <Debt user ={props.user.id} userId ={debt.userId}  debtor ={debt.debtor} description = {debt.description} amount =  {debt.amount} reason ={debt.reason} id ={debt._id} date =  {debt.date} key = {debt._id}></Debt>
   )}
     </GridList>
     )

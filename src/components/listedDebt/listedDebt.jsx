@@ -23,11 +23,18 @@ const Debt =  (props) => {
   function handleClose() {
     setOpen(false);
   }
+
+  function handleNegativeValues (amount) {
+    return props.userId!==props.user ? Number(-amount) : Number(amount);
+  }
+  console.log( props.userId);
   
   return (
     <div className={classes.root}>
-      <ExpansionPanel TransitionProps={{ unmountOnExit: true }}>
+      <ExpansionPanel TransitionProps={{ unmountOnExit: true }}
+      >
         <ExpansionPanelSummary
+        className ={ props.userId!==props.user ? classes.red : classes.green}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1c-content"
           id="panel1c-header"
@@ -39,7 +46,7 @@ const Debt =  (props) => {
             <Typography className={classes.heading}>{props.debtor}</Typography>
           </div>
           <div className={classes.column}>
-          <Typography align= "right" className={classes.heading}>{props.amount}€</Typography>
+          <Typography align= "right" className={classes.heading}>{handleNegativeValues(props.amount)}€</Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
@@ -49,9 +56,9 @@ const Debt =  (props) => {
           <div className={classes.column}>
           <Typography className={classes.heading}>{props.description}</Typography>
           </div>
-          <div align = "right" className={classes.column}>
-          <Button size="small" color="secondary" onClick ={handleClickOpen} >DELETE</Button>
-          <Button size="small" color="primary"    
+          <div align = "right" className={classes.buttons_box}>
+          <Button size="small" className={classes.button} color="secondary" variant ="outlined" onClick ={handleClickOpen} >DELETE</Button>
+          <Button size="small" className={classes.button} variant ="outlined" color="primary"    
            onClick={() => {  props.history.push(`/debts/editDebt/${props.id}`); }}>
             EDIT
           </Button>

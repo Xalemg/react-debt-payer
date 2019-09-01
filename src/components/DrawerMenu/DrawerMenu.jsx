@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {HomeIcon, SettingsIcon, Own, Owned, Stats} from '../../assets/Icons/Icons';
+import {HomeIcon, SettingsIcon, Stats} from '../../assets/Icons/Icons';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -24,6 +24,7 @@ import {connect} from 'react-redux'
 import { Link } from "react-router-dom";
 import { logOut } from '../../redux/actions/users/logOut';
 import AddDebtFab from '../AddDebtFab/AddDebtFab'
+import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
 
 class DrawerMenu extends React.Component {
   constructor( props) {
@@ -131,34 +132,28 @@ class DrawerMenu extends React.Component {
               <ListItemText primary='Overview' />
           </ListItem>
           </Link>
-          <Link to = '/own' style = {{textDecoration: "none"}}>
-          <ListItem button key={'Debts I own'}>
-              <ListItemIcon><Own/></ListItemIcon>
-              <ListItemText primary='Debts I owe'/>
-          </ListItem>
-          </Link>  
-          <Link to = 'owned' style = {{textDecoration: "none"}}>
-          <ListItem button key={'Debts being Owed'}>
-              <ListItemIcon><Owned/></ListItemIcon>
-              <ListItemText primary='Debts being owed'/>
-          </ListItem>
-          </Link>  
-          <Link to = 'stats' style = {{textDecoration: "none"}}>
+          <Link to = '/stats' style = {{textDecoration: "none"}}>
           <ListItem button key={'Stats'}>
               <ListItemIcon><Stats/></ListItemIcon>
               <ListItemText primary='Stats' />
           </ListItem>
-          </Link>  
+          </Link>
+          <Link to = '/friends' style = {{textDecoration: "none"}}>
+          <ListItem button key={'/Friends'} >
+            <ListItemIcon><PeopleRoundedIcon/></ListItemIcon>
+              <ListItemText primary='Friends' />
+          </ListItem>
+          </Link>
           </List>
           <Divider />
           <List>
-          <Link to = 'settings' style = {{textDecoration: "none"}}>
+          <Link to = '/Settings' style = {{textDecoration: "none"}}>
           <ListItem button key={'Settings'} >
             <ListItemIcon><SettingsIcon/></ListItemIcon>
               <ListItemText primary='Settings' />
           </ListItem>
           </Link>
-          <Link to = 'stats' style = {{display: "none"}}>
+          <Link to = '/stats' style = {{display: "none"}}>
           <ListItem  button key={'About this'} to = 'stats'>
               <ListItemIcon><MailIcon/></ListItemIcon>
               <ListItemText primary='About this'/>

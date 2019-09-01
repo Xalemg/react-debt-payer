@@ -25,6 +25,10 @@ import { makeStyles } from '@material-ui/core/styles';
     stepper: {
       padding: theme.spacing(3, 0, 5),
     },
+    checkBox: {
+      padding: theme.spacing(1.5, 0, 0),
+      marginRight: theme.spacing(0),
+    },
     buttons: {
       display: 'flex',
       margin: theme.spacing(1),

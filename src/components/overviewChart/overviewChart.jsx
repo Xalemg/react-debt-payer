@@ -1,7 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import style from "./style.css";
-
 // Generate Sales Data
 function createData(date, amount) {
   date =  date.substring(0,10);
@@ -12,8 +11,9 @@ function createData(date, amount) {
 
 export default function OverviewChart(props) {
   let sum = 0;
+  console.log(props.debts);
   const data = props.debts.map((debt,i,debts) =>{
-    sum = sum + debt.amount
+    debt.userId === props.userId ? sum = sum + debt.amount : sum = sum - debt.amount;
     return createData(debt.date, sum);
   },sum);
 
@@ -36,7 +36,7 @@ export default function OverviewChart(props) {
           </XAxis>
           <YAxis>
             <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
-              Owned (€)
+              {props.legend ? "Owned (€)" : null}
             </Label>
           </YAxis>
           <Line type="monotone" dataKey="amount" stroke="#556CD6" dot={false} />
