@@ -1,4 +1,8 @@
 const styles = theme => ({
+
+  friendPage: {
+      paddingBottom: "80px",
+    },
     container: {
         paddingLeft: "64px",
     },
@@ -17,7 +21,9 @@ const styles = theme => ({
         textAlign :'left'
       },
       header: {
-       height:"230px"
-      }
+       height:"200px",
+       padding: "10px",
+       marginBottom: "10px",
+      },
 })
 export default styles;

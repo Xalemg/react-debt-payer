@@ -8,7 +8,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import styles from "./style";
 import classNames from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
 import Loader from '../../components/loader/loader';
 import { CodeDisplayer } from '../../components/CodeDisplayer/CodeDisplayer';
 import {FriendAdder} from '../../components/FriendAdder/FriendAdder';
@@ -17,9 +16,7 @@ import Title from '../../components/Title/Title';
 
 
 
-const useStyles = makeStyles(theme => ({
 
-}));
 
 const FriendsPage = (props) => {
 
@@ -29,7 +26,7 @@ const FriendsPage = (props) => {
 
   }, []);
 
-  const { classes } = { ...props, useStyles };
+  const { classes } = { ...props };
 
   return (
 
@@ -43,17 +40,16 @@ const FriendsPage = (props) => {
           alignItems="stretch"
           className={classNames(classes.container)} >
          
-          <Grid item xl={8} xm={8} lg={8} xs={12 } >
-            <Paper>
+          <Grid item xl={8} xm={8} lg={8} xs={12 }  >
+            <Paper  className={ classNames(classes.header)}>
               <FriendAdder userId={props.user.id} />
             </Paper>
           </Grid>
           <Grid item xl={4} xm={4} lg={4} xs={12}>
-            <Paper>
+            <Paper  className={ classNames(classes.header)}>
               <CodeDisplayer userId={props.user.id} />
             </Paper>
           </Grid>
-          {/* Recent Debts */}
           <Grid item xs={12} >
             <Paper>
             <Container maxWidth="xl" className={classNames(classes.friendPage)} >
@@ -68,14 +64,21 @@ const FriendsPage = (props) => {
               <Title>You have { props.user ? ` ${props.user.friends.length} friend`  :" 0 friends "} </Title>
               </Grid>
               { props.user ? props.user.friends.map(friend => 
-                (<Grid item key = {friend.email}><FriendCard email= {friend.email}></FriendCard> </Grid>)
+                (<Grid item key = {friend._id}>
+                  <FriendCard email= {friend.email}
+                   id = {friend._id}
+                   userId = {props.user.id}
+                   debts={props.debts.filter( (debt) => debt.debtorId === friend._id || debt.userId === friend._id ? debt : null )} 
+                   name= {friend.name}
+                   ></FriendCard>
+                   </Grid>)
               ) : ":("}
             </Grid>
             </Container>
           </Paper>
           </Grid>
         </Grid>
-      </Container>
+      </Container >
       : <Loader />
   )
 }
@@ -85,4 +88,4 @@ const mapStateToProps = state => {
     debts: state.debts.debts
   }
 }
-export default withStyles(styles, { withTheme: true })(connect(mapStateToProps, { getUserInfo, listDebts })(FriendsPage));
+export default withStyles(styles)(connect(mapStateToProps, { getUserInfo, listDebts })(FriendsPage));

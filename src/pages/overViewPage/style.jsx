@@ -17,7 +17,12 @@ const styles = theme => ({
         textAlign :'left'
       },
       header: {
-       height:"230px"
-      }
+       height:"230px",
+        padding: "10px",
+      },
+      summary: {
+        height:"230px",
+         padding: "50px",
+       },
 })
 export default styles;

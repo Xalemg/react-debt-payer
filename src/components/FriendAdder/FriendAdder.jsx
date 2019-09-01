@@ -15,7 +15,6 @@ export const FriendAdder = (props) => {
     return (
         <React.Fragment>
         <Title>Add friends</Title>
-
         <Typography color="textSecondary" className={classes.depositContext}>
             You  can add your friends to share debts with them. Ask them for their user code and introduce it here:
     </Typography>
