@@ -16,6 +16,7 @@ function EditDebtPage(props) {
     if(props.count !== 1) {
       props.getDebt(debtId, props.user.token);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

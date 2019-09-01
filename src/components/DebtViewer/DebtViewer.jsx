@@ -15,8 +15,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FriendSelector from '../../components/friendSelector/friendSelector';
 import {deleteDebt} from '../../redux/actions/debts/deleteDebt';
 
-
-function DebtViewer(props) {
+function DebtViewer (props) {
   const classes = useStyles();
   console.log(props.debt.userId === props.user.id);
 
@@ -43,7 +42,7 @@ function DebtViewer(props) {
   }
   useEffect(() => {   
       props.getUserInfo(props.user.email, props.user.token);
-     
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[] );
   
 const handleDeleteIcon = (includeDelete) => { 

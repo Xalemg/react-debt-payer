@@ -85,7 +85,7 @@ export function FriendCard({id, debts, name, email, userId}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-        <DebtList debts = { debts} user={{id, name, email}} />
+        <DebtList debts = {debts} user={{id, name, email}} />
         </CardContent>
       </Collapse>
     </Card>
