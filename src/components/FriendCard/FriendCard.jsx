@@ -62,7 +62,7 @@ export function FriendCard({id, debts, name, email, userId}) {
         subheader={email}
       />
       <CardContent>
-          <Grid containe >
+          <Grid container >
             <Grid item style={{height:"200px"}} xl={12}>
               <OverviewChart  debts= {debts} userId = {userId} legend = {false} />
             </Grid>

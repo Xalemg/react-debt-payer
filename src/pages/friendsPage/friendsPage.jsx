@@ -10,21 +10,22 @@ import styles from "./style";
 import classNames from 'classnames';
 import Loader from '../../components/loader/loader';
 import { CodeDisplayer } from '../../components/CodeDisplayer/CodeDisplayer';
-import {FriendAdder} from '../../components/FriendAdder/FriendAdder';
+import FriendAdder from '../../components/FriendAdder/FriendAdder';
 import {FriendCard} from '../../components/FriendCard/FriendCard';
 import Title from '../../components/Title/Title';
 
 
 
 
-
-const FriendsPage = ({user, debts, getUserInfo, listDebts, classes}) => {
+const FriendsPage = ({user, debts, getUserInfo, listDebts, addFriend, classes}) => {
 
   useEffect(() => {
     getUserInfo(user.email, user.token);
     listDebts(user.token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
 
 
   return (
@@ -41,7 +42,7 @@ const FriendsPage = ({user, debts, getUserInfo, listDebts, classes}) => {
          
           <Grid item xl={8} xm={8} lg={8} xs={12 }  >
             <Paper  className={ classNames(classes.header)}>
-              <FriendAdder userId={user.id} />
+              <FriendAdder userId={user.id} token = {user.token} />
             </Paper>
           </Grid>
           <Grid item xl={4} xm={4} lg={4} xs={12}>
