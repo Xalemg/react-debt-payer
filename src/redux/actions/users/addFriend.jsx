@@ -3,6 +3,8 @@ import axios from 'axios';
 
 
 export const addFriend = (userId, friendId, token) => {
+  console.log("asdasd");
+  
     return (dispatch) => {
       return axios({
         method: "POST",
@@ -10,6 +12,9 @@ export const addFriend = (userId, friendId, token) => {
         headers: {
           Authorization: "Bearer " + token,
           type: "application/json",
+        },
+        params: {
+          userId
         },
         data: {
             friendId

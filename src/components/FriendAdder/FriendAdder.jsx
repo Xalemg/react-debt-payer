@@ -14,19 +14,13 @@ const useStyles = makeStyles({
     },
 });
 
-const handleAddFriend = (userId, friendId, token) => {
-    console.log({userId, friendId, token});
-    
-    addFriend(userId, friendId, token);
-  }
-
-
-
-const  FriendAdder =  ({userId, token}) => {
+const  FriendAdder =  ({userId, token, addFriend}) => {
 
     const [value,setValue] = useState("");
 
-
+    const handleAddFriend = (userId, friendId, token) => { 
+        addFriend(userId, friendId, token);
+      }
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -43,7 +37,7 @@ const  FriendAdder =  ({userId, token}) => {
         style={{ margin:'10px 5px', width:' 82% '}}
         placeholder="Example: 5cfcd95b7497b90d1405334b "
         />
-        <IconButton onTouchTap = {() => handleAddFriend(userId, value, token)}
+        <IconButton onClick = {() => handleAddFriend(userId, value, token)}
         style={{margin:'15px 0 0 5px'}} color="primary" ><PersonAddIcon/> </IconButton>
     </React.Fragment>
     );

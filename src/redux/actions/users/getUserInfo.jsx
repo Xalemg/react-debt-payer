@@ -2,9 +2,7 @@ import { GET_INFO, baseUrl } from '../types';
 import axios from 'axios';
 
 export const getUserInfo = (user, token) => {
-    return (dispatch) => {
-      console.log(user);
-      
+    return (dispatch) => {      
       return axios({
         method: "GET",
         url:baseUrl + `/users/info/${user}`,
@@ -29,6 +27,7 @@ export const getUserInfo = (user, token) => {
         type: GET_INFO,
         payload: {
             id,
+            email,
             image,
             name,
             friends,

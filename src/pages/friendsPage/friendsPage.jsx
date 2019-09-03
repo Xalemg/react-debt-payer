@@ -61,9 +61,9 @@ const FriendsPage = ({user, debts, getUserInfo, listDebts, addFriend, classes}) 
             alignItems="flex-start"
             >
               <Grid xs={12} item>
-              <Title>You have { user ? ` ${user.friends.length} friend`  :" 0 friends "} </Title>
+              <Title>You have { user!=null && user.friends!=null  ? ` ${user.friends.length} friend`  :" 0 friends "} </Title>
               </Grid>
-              { user ? user.friends.map(friend => 
+              {  user!=null && user.friends!=null  ? user.friends.map(friend => 
                 (<Grid item key = {friend._id}>
                   <FriendCard email= {friend.email}
                    id = {friend._id}

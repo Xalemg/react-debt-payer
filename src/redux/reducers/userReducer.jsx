@@ -1,4 +1,4 @@
-import { LOGIN, GET_INFO, LOGOUT, REGISTER , UPDATE_USER} from '../actions/types';
+import { ADD_FRIEND, LOGIN, GET_INFO, LOGOUT, REGISTER , UPDATE_USER} from '../actions/types';
 const initialState = {
   message: "",
   online: false,
@@ -72,6 +72,12 @@ const initialState = {
         token: payload.token,
         avatar: payload.image,
         name: payload.name,
+      };
+    }
+    case ADD_FRIEND: {
+      return { ...state,
+        message: payload.message,
+        friends:{ ...payload.friends}
       };
     }
     default:
