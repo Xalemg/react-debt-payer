@@ -1,13 +1,14 @@
-import { ADD_FRIEND, baseUrl } from '../types';
+import { DELETE_FRIEND, baseUrl } from '../types';
 import axios from 'axios';
+import { getUserInfo } from './getUserInfo';
 
-export const addFriend = (user, friendId, token) => {
+export const deleteFriend = (userId, mail, friendId, token) => {
+  console.log(userId);
     return (dispatch) => {
-      console.log(user);
       
       return axios({
-        method: "GET",
-        url:baseUrl + `/users/info/${user}`,
+        method: "DELETE",
+        url:baseUrl + `/users/deleteFriend/${userId}`,
         headers: {
           Authorization: "Bearer " + token,
           type: "application/json",
@@ -17,7 +18,8 @@ export const addFriend = (user, friendId, token) => {
         }
        })
         .then(response => {
-          dispatch(addFriendSuccess(response.data));
+          dispatch(deleteFriendSuccess(response.data));
+          dispatch(getUserInfo(mail,token));
         })
         .catch(error => {
           console.log("Error login " + error);
@@ -26,17 +28,13 @@ export const addFriend = (user, friendId, token) => {
     };
   };
   
-  export const addFriendSuccess = ({message, token, id, image, name, friends}) => {
+  export const deleteFriendSuccess = ({message, token, id, image, name, friends}) => {
     console.log("message " + JSON.stringify(message));
     
       return {
-        type: GET_INFO,
+        type: DELETE_FRIEND,
         payload: {
             message,
-            token,
-            id,
-            image,
-            name,
             friends,
             online: true,
         }

@@ -16,6 +16,9 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { calculateSum } from '../../components/auxiliar/functions/auxFunctions';
 import OverviewChart from '../../components/overviewChart/overviewChart';
+import { connect } from 'react-redux';
+import {deleteFriend} from '../../redux/actions/users/deleteFriend';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -42,9 +45,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function FriendCard({id, debts, name, email, userId}) {
+function FriendCard({id, debts, name, email, userId, user, deleteFriend})  {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  const handleDelete = (friendId,userId,userMail,token) => {
+    deleteFriend(friendId, userMail,userId,token);
+  } 
 
   function handleExpandClick() {
     setExpanded(!expanded);
@@ -64,14 +71,17 @@ export function FriendCard({id, debts, name, email, userId}) {
       <CardContent>
           <Grid container >
             <Grid item style={{height:"200px"}} xl={12}>
+            <Typography variant="body2" color="textSecondary" component="p">
+            Your total debts with <b>{name}</b> are <b>{calculateSum(debts,userId)}€</b>
+          </Typography>
               <OverviewChart  debts= {debts} userId = {userId} legend = {false} />
             </Grid>
           </Grid>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Your total debts with {name} are {calculateSum(debts,userId)}€
-        </Typography>
       </CardContent>
       <CardActions disableSpacing>
+      <IconButton onClick ={() => handleDelete(user.id,userId, user.email,user.token) }>
+          <DeleteIcon  />
+        </IconButton>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -91,3 +101,10 @@ export function FriendCard({id, debts, name, email, userId}) {
     </Card>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+export default (connect(mapStateToProps, {deleteFriend} )(FriendCard));

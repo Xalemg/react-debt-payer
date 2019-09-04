@@ -77,7 +77,6 @@ const initialState = {
     case ADD_FRIEND: {
       return { ...state,
         message: payload.message,
-        friends:{ ...payload.friends}
       };
     }
     default:

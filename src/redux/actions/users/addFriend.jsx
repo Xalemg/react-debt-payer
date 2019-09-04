@@ -1,8 +1,9 @@
 import { ADD_FRIEND, baseUrl } from '../types';
 import axios from 'axios';
+import { getUserInfo } from './getUserInfo';
 
 
-export const addFriend = (userId, friendId, token) => {
+export const addFriend = (userId, mail, friendId, token) => {
   console.log("asdasd");
   
     return (dispatch) => {
@@ -22,6 +23,7 @@ export const addFriend = (userId, friendId, token) => {
        })
         .then(response => {
           dispatch(addFriendSuccess(response.data));
+          dispatch(getUserInfo(mail,token));
         })
         .catch(error => {
           console.log("Error login " + error);
@@ -30,17 +32,13 @@ export const addFriend = (userId, friendId, token) => {
     };
   };
   
-  export const addFriendSuccess = ({message, token, id, image, name, friends}) => {
+  export const addFriendSuccess = ({message, friends}) => {
     console.log("message " + JSON.stringify(message));
     
       return {
         type: ADD_FRIEND,
         payload: {
             message,
-            token,
-            id,
-            image,
-            name,
             friends,
             online: true,
         }

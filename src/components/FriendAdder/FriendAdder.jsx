@@ -6,6 +6,7 @@ import { TextField, IconButton } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { connect } from 'react-redux';
 import {addFriend} from '../../redux/actions/users/addFriend';
+import { getUserInfo } from '../../redux/actions/users/getUserInfo';
 
 
 const useStyles = makeStyles({
@@ -14,12 +15,12 @@ const useStyles = makeStyles({
     },
 });
 
-const  FriendAdder =  ({userId, token, addFriend}) => {
+const  FriendAdder =  ({userId, token, addFriend, userMail}) => {
 
     const [value,setValue] = useState("");
 
-    const handleAddFriend = (userId, friendId, token) => { 
-        addFriend(userId, friendId, token);
+    const handleAddFriend = (userId, friendId, userMail, token) => { 
+        addFriend(userId, userMail, friendId, token);
       }
     const classes = useStyles();
     return (
@@ -37,10 +38,10 @@ const  FriendAdder =  ({userId, token, addFriend}) => {
         style={{ margin:'10px 5px', width:' 82% '}}
         placeholder="Example: 5cfcd95b7497b90d1405334b "
         />
-        <IconButton onClick = {() => handleAddFriend(userId, value, token)}
+        <IconButton onClick = {() => handleAddFriend(userId, value, userMail, token)}
         style={{margin:'15px 0 0 5px'}} color="primary" ><PersonAddIcon/> </IconButton>
     </React.Fragment>
     );
 };
 
-export default (connect(null, {addFriend})(FriendAdder));
+export default (connect(null, {addFriend, getUserInfo})(FriendAdder));

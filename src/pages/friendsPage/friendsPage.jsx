@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import Loader from '../../components/loader/loader';
 import { CodeDisplayer } from '../../components/CodeDisplayer/CodeDisplayer';
 import FriendAdder from '../../components/FriendAdder/FriendAdder';
-import {FriendCard} from '../../components/FriendCard/FriendCard';
+import FriendCard from '../../components/FriendCard/FriendCard';
 import Title from '../../components/Title/Title';
 
 
@@ -42,7 +42,7 @@ const FriendsPage = ({user, debts, getUserInfo, listDebts, addFriend, classes}) 
          
           <Grid item xl={8} xm={8} lg={8} xs={12 }  >
             <Paper  className={ classNames(classes.header)}>
-              <FriendAdder userId={user.id} token = {user.token} />
+              <FriendAdder userId={user.id} token = {user.token} userMail= {user.email} />
             </Paper>
           </Grid>
           <Grid item xl={4} xm={4} lg={4} xs={12}>
