@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import useStyles from './style'
 import CalendarToday from "@material-ui/icons/CalendarTodayOutlined";
 import Typography from '@material-ui/core/Typography';
-import {FormControlLabel, Grid, TextField, Button, Radio, RadioGroup, InputAdornment, IconButton } from '@material-ui/core'
+import {FormControl , FormControlLabel, Grid, TextField, Button, Radio, RadioGroup, InputAdornment, IconButton } from '@material-ui/core';
 import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import {connect} from 'react-redux'
@@ -14,6 +14,7 @@ import DeleteDebtModal from '../../components/deleteDebtModal/deleteDebtModal'
 import Checkbox from '@material-ui/core/Checkbox';
 import FriendSelector from '../../components/friendSelector/friendSelector';
 import {deleteDebt} from '../../redux/actions/debts/deleteDebt';
+import {validateDebt} from '../auxiliar/validators/validators';
 
 function DebtViewer (props) {
   const classes = useStyles();
@@ -89,22 +90,27 @@ const handleDeleteIcon = (includeDelete) => {
 } 
 
 
-  const sendDebtToServer = (values,user) => { 
-    let userId, debtorId;
-    if(values.payer === "true") {
-      userId = user.id;
-      debtorId = values.personId;
-    } else {
-      userId = values.personId;
-      debtorId =  user.id;
-    }
+  const sendDebtToServer = (values,user) => {
 
-    if(props.settings.addDebt) {
-      props.addDebt(userId, debtorId, values.debtorIsFriend===false ? values.person : null, values.reason, values.payer,values.amount,values.description, values.date, values.payed, user.token)
-    }
-    if(props.settings.updateDebt) {
-      props.updateDebt(userId, debtorId, props.debt.debtId, values.debtorIsFriend===false ? values.person : null, values.payer, values.reason,values.amount,values.description, values.date, values.payed, user.token)
-    }  
+    const validator = validateDebt(values);
+    if (validator.isValid) {
+      let userId, debtorId;
+
+      if(values.payer === "true") {
+        userId = user.id;
+        debtorId = values.personId;
+      } else {
+        userId = values.personId;
+        debtorId =  user.id;
+      }
+  
+      if(props.settings.addDebt) {
+        props.addDebt(userId, debtorId, values.debtorIsFriend===false ? values.person : null, values.reason, values.payer,values.amount,values.description, values.date, values.payed, user.token)
+      }
+      if(props.settings.updateDebt) {
+        props.updateDebt(userId, debtorId, props.debt.debtId, values.debtorIsFriend===false ? values.person : null, values.payer, values.reason,values.amount,values.description, values.date, values.payed, user.token)
+      } 
+    }     
   }
   const handleChange = name => (event) => {
     
@@ -133,7 +139,7 @@ const handleFriendSelect = (value) => {
             {props.settings.tittle}
           </Typography>
           <React.Fragment>
-
+          <FormControl>
       <Grid container spacing={5}>
         <Grid item xs={3} style ={{paddingLeft:"0px",paddingRight:"0px"}}>
           <FormControlLabel 
@@ -256,6 +262,7 @@ const handleFriendSelect = (value) => {
         </Grid>
         {handleDeleteIcon(props.includeDelete)}
       </Grid>
+      </FormControl>
     </React.Fragment>
         </Paper>
   );

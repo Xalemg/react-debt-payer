@@ -17,6 +17,7 @@ export const login = (email, password) => {
         },
        })
         .then(response => {
+          
           dispatch(loginSuccess(response.data))
         })
         .catch(error => {
@@ -26,9 +27,11 @@ export const login = (email, password) => {
     };
   };
   
-  export const loginSuccess = ({message, token, id, image, name}) => {
+  export const loginSuccess = ({message, token, id, image, name, email}) => {
     console.log("message " + JSON.stringify(message));
-    
+    localStorage.setItem('token', token);
+    localStorage.setItem('id', id);
+    localStorage.setItem('email', email);
       return {
         type: LOGIN,
         payload: {
@@ -37,6 +40,7 @@ export const login = (email, password) => {
             id,
             image,
             name,
+            email,
             online: true,
         }
       }

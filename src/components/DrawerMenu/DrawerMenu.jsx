@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {HomeIcon, SettingsIcon, Stats} from '../../assets/Icons/Icons';
+import { SettingsIcon} from '../../assets/Icons/Icons';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -20,11 +20,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import styles from "./styles";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import {connect} from 'react-redux'
-import { Link } from "react-router-dom";
+import {connect} from 'react-redux';
+import { Link, Redirect } from "react-router-dom";
 import { logOut } from '../../redux/actions/users/logOut';
-import AddDebtFab from '../AddDebtFab/AddDebtFab'
+import AddDebtFab from '../AddDebtFab/AddDebtFab';
 import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 class DrawerMenu extends React.Component {
   constructor( props) {
@@ -64,109 +65,111 @@ class DrawerMenu extends React.Component {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     const login = checkLogin(user, this.handleCloseAuthMenu, this.handleLogOff);
-    return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={classNames(classes.appBar, {
-          })}
-        >
-          <Toolbar >
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.state.openMenu ? this.handleDrawerClose : this.handleDrawerOpen}
-              className={classNames(classes.menuButton)}
-            >
-               {!this.state.openMenu? <MenuIcon /> : <ChevronLeftIcon/>}
-            </IconButton>
-            <Typography className= {classes.appTitle} variant="h6" color="inherit" noWrap>
-              Debt payer
-            </Typography>
-            <div className = {classNames(classes.authMenu)} >
+     if(user.token) {
+      return (
+      
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            className={classNames(classes.appBar, {
+            })}
+          >
+            <Toolbar >
               <IconButton
-                aria-owns={open ? 'menu-appbar' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleMenu}
                 color="inherit"
+                aria-label="Open drawer"
+                onClick={this.state.openMenu ? this.handleDrawerClose : this.handleDrawerOpen}
+                className={classNames(classes.menuButton)}
               >
-              <AccountCircle/>
+                 {!this.state.openMenu? <MenuIcon /> : <ChevronLeftIcon/>}
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={this.handleCloseAuthMenu}
-              >
-                {login}
-              </Menu>
-            </div>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.openMenu,
-            [classes.drawerClose]: !this.state.openMenu,
-          })}
-          classes={{
-            paper: classNames({
+              <Typography className= {classes.appTitle} variant="h6" color="inherit" noWrap>
+                Debt payer
+              </Typography>
+              <div className = {classNames(classes.authMenu)} >
+                <IconButton
+                  aria-owns={open ? 'menu-appbar' : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleMenu}
+                  color="inherit"
+                >
+                <AccountCircle/>
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={this.handleCloseAuthMenu}
+                >
+                  {login}
+                </Menu>
+              </div>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            className={classNames(classes.drawer, {
               [classes.drawerOpen]: this.state.openMenu,
               [classes.drawerClose]: !this.state.openMenu,
-            }),
-          }}
-          open={this.state.openMenu}
-        >
-          <div className={classes.toolbar}>
-          </div>
-          <Divider/>
-          <List>
-          <Link to = '/overview'  style = {{textDecoration: "none"}}>
-          <ListItem button key={'Overview'}>
-              <ListItemIcon><HomeIcon/></ListItemIcon>
-              <ListItemText primary='Overview' />
-          </ListItem>
-          </Link>
-          <Link to = '/stats' style = {{textDecoration: "none"}}>
-          <ListItem button key={'Stats'}>
-              <ListItemIcon><Stats/></ListItemIcon>
-              <ListItemText primary='Stats' />
-          </ListItem>
-          </Link>
-          <Link to = '/friends' style = {{textDecoration: "none"}}>
-          <ListItem button key={'/Friends'} >
-            <ListItemIcon><PeopleRoundedIcon/></ListItemIcon>
-              <ListItemText primary='Friends' />
-          </ListItem>
-          </Link>
-          </List>
-          <Divider />
-          <List>
-          <Link to = '/Settings' style = {{textDecoration: "none"}}>
-          <ListItem button key={'Settings'} >
-            <ListItemIcon><SettingsIcon/></ListItemIcon>
-              <ListItemText primary='Settings' />
-          </ListItem>
-          </Link>
-          <Link to = '/stats' style = {{display: "none"}}>
-          <ListItem  button key={'About this'} to = 'stats'>
-              <ListItemIcon><MailIcon/></ListItemIcon>
-              <ListItemText primary='About this'/>
-          </ListItem>
-          </Link>  
-          </List>
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-        </main>
-        <AddDebtFab/>
-      </div>
-    );
+            })}
+            classes={{
+              paper: classNames({
+                [classes.drawerOpen]: this.state.openMenu,
+                [classes.drawerClose]: !this.state.openMenu,
+              }),
+            }}
+            open={this.state.openMenu}
+          >
+            <div className={classes.toolbar}>
+            </div>
+            <Divider/>
+            <List>
+            <Link to = '/overview'  style = {{textDecoration: "none"}}>
+            <ListItem button key={'Overview'}>
+                <ListItemIcon><MonetizationOnIcon/></ListItemIcon>
+                <ListItemText primary='Overview' />
+            </ListItem>
+            </Link>
+            <Link to = '/friends' style = {{textDecoration: "none"}}>
+            <ListItem button key={'/Friends'} >
+              <ListItemIcon><PeopleRoundedIcon/></ListItemIcon>
+                <ListItemText primary='Friends' />
+            </ListItem>
+            </Link>
+            </List>
+            <Divider />
+            <List>
+            <Link to = '/Settings' style = {{textDecoration: "none"}}>
+            <ListItem button key={'Settings'} >
+              <ListItemIcon><SettingsIcon/></ListItemIcon>
+                <ListItemText primary='Settings' />
+            </ListItem>
+            </Link>
+            <Link to = '/stats' style = {{display: "none"}}>
+            <ListItem  button key={'About this'} to = 'stats'>
+                <ListItemIcon><MailIcon/></ListItemIcon>
+                <ListItemText primary='About this'/>
+            </ListItem>
+            </Link>  
+            </List>
+          </Drawer>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+          </main>
+          <AddDebtFab/>
+        </div>
+      );
+     }
+    else {
+      return (
+        <Redirect to ={"/login"}/>
+      )
+    }
   }
 }
 const mapStateToProps = state => {

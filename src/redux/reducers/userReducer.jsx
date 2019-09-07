@@ -2,15 +2,12 @@ import { ADD_FRIEND, LOGIN, GET_INFO, LOGOUT, REGISTER , UPDATE_USER} from '../a
 const initialState = {
   message: "",
   online: false,
-  id: "5cfcd95b7497b9001405c34b",
-  //id: null
-  email: "xalemg@gmail.com",
-  //email: null,
+  id: localStorage.getItem("id"),
+  email: localStorage.getItem("email"),
   avatar: null,
   name: null,
   friends: [],
-  //token: null,
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InhhbGVtZ0BnbWFpbC5jb20iLCJ1c2VySWQiOiI1Y2ZjZDk1Yjc0OTdiOTAwMTQwNWMzNGIiLCJpYXQiOjE1NjAwNzcwNzd9.UR5wKCh-PZKNEn2XpDLafHLT4n03vyadD5dDwuBZ6WM'
+  token: localStorage.getItem("token"),
 };
 
  function reducer(state = initialState, {
@@ -28,6 +25,7 @@ const initialState = {
         token: payload.token,
         image: payload.image,
         name: payload.name,
+        email: payload.email,
         friends: payload.friends
       };
     }
@@ -47,11 +45,13 @@ const initialState = {
       
       return { ...state,
         message: payload.message,
-        online: true,
+        online: null,
         id: null,
         token: null,
         avatar: null,
         name: null,
+        email: null,
+        friends: null
       };
     }
     case REGISTER: {

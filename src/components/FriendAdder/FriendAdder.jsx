@@ -36,7 +36,7 @@ const  FriendAdder =  ({userId, token, addFriend, userMail}) => {
         value = {value}
         onChange={ (event) => setValue(event.target.value)}
         style={{ margin:'10px 5px', width:' 82% '}}
-        placeholder="Example: 5cfcd95b7497b90d1405334b "
+        placeholder="Example: 5cfcd95b7497b90d1405334b"
         />
         <IconButton onClick = {() => handleAddFriend(userId, value, userMail, token)}
         style={{margin:'15px 0 0 5px'}} color="primary" ><PersonAddIcon/> </IconButton>
