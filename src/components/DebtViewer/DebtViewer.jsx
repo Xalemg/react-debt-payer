@@ -92,8 +92,8 @@ const handleDeleteIcon = (includeDelete) => {
 
   const sendDebtToServer = (values,user) => {
 
-    const validator = validateDebt(values);
-    if (validator.isValid) {
+    const wrongFields = validateDebt(values);
+    if ( wrongFields.length != null && wrongFields.length > 0) {
       let userId, debtorId;
 
       if(values.payer === "true") {

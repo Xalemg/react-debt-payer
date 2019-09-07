@@ -1,30 +1,32 @@
+const EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const validateDebt = (fields, refs) => {
+export const validateDebt = (fields, debtorIsFriend) => {
 
     //eslint-disable-next-line
-    const emailPatter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 
     if (fields != null && Array.isArray(fields) && fields.length > 0 ) {
-        let wrongfields = [];
+        let wrongFields = [];
         fields.forEach(field => {
+
             if (field.required && (field.value == null || field.value === "")) {
-                wrongfields.push({
+                wrongFields.push({
                     field: field.name,
                     error: "Necessary value",
                 });
             }
-            if (field.name ==="email" && emailPatter.test(field.name) ) {
-                wrongfields.push({
-                    field: field.name,
-                    error: "Wrong email format",
-                });
-            }
+        // Mover al validador de registro
+        //   if (field.name ==="email" && emailPatter.test(field.name) ) {
+        //       wrongfields.push({
+        //           field: field.name,
+        //           error: "Wrong email format",
+        //       });
+        //   }
         });
 
-        return ({
-            wrongfields,
-            isValid: false,
-        });
+        return (
+            wrongFields
+        );
     }
     return null;
 }
