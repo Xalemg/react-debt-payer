@@ -3,27 +3,26 @@ const EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".
 
 export const validateDebt = (fields) => {
 
+    let wrongFields = [];
     if (fields != null && Array.isArray(fields) && fields.length > 0 ) {
-        let wrongFields = [];
         fields.forEach(field => {
             if (field.required && (field.value == null || field.value === "")) {
                 wrongFields.push({
                     field: field.name,
                     error: "Necessary value",
                 });
+            } else if(field.name === "email" && validateEmail(field.value)) {
+                wrongFields.push({
+                    field: field.name,
+                    error: "Invalid  email",
+                });
             }
-        return (
-            wrongFields
-        );
-    }
-    return null;
+        })};
+        return wrongFields;
 
 }
+export const validateEmail = (email) => {
+    return EMAIL_PATTERN.test(email);
+}
+
 // Mover al validador de registro
-    //   if (field.name ==="email" && emailPatter.test(field.name) ) {
-    //       wrongfields.push({
-    //           field: field.name,
-    //           error: "Wrong email format",
-    //       });
-    //   }
-});
