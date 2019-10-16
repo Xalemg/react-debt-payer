@@ -20,7 +20,7 @@ function EditDebtPage(props) {
   }, []);
 
   return (
-
+ 
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.layout}>
@@ -34,6 +34,9 @@ function EditDebtPage(props) {
         "reason": props.debt.reason,
         "userId": props.debt.user_id,
         "payed": props.debt.payed,
+        "debtorIsFriend": 
+        (props.debt.user_id !==null && props.debt.debtor_id !==undefined && props.debt.debtor_id !=="") 
+        && (props.debt.user_id !==null && props.debt.user_id !==undefined && props.debt.user_id !==""),
         "debtorId": props.debt.debtor_id,
         "amount": Number(props.debt.amount),
         "date": (props.debt.date),

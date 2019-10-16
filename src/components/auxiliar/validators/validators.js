@@ -1,5 +1,4 @@
-//eslint-disable-next-line
-const EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+import { EMAIL_PATTERN } from "../../Constants/constants";
 
 export const validateDebt = (fields) => {
 
@@ -19,10 +18,7 @@ export const validateDebt = (fields) => {
             }
         })};
         return wrongFields;
-
 }
 export const validateEmail = (email) => {
     return EMAIL_PATTERN.test(email);
 }
-
-// Mover al validador de registro

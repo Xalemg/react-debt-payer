@@ -23,9 +23,7 @@ function DebtViewer (props) {
   const [values, setValues] = React.useState({
     person: props.debt.person,
     personId: props.debt.userId === props.user.id ? props.debt.debtorId :  props.debt.userId,
-    debtorIsFriend: 
-    (props.debt.debtorId !==null && props.debt.debtorId !==undefined && props.debt.debtorId !=="") 
-    && (props.debt.userId !==null && props.debt.userId !==undefined && props.debt.userId !==""),
+    debtorIsFriend: props.debt.debtorIsFriend,
     payed:  props.debt.payed,
     reason:props.debt.reason,
     amount: props.debt.amount,
