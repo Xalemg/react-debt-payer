@@ -92,14 +92,27 @@ const handleDeleteIcon = (includeDelete) => {
 
   const sendDebtToServer = (values,user) => {
 
-    const wrongFields = validateDebt(values);
+    console.log(values);
+    let debtValues = [];
+    Object.keys(values).forEach(
+      ( (name,index) => {
+        if(Object.keys(values)[index]){
+          debtValues.push({
+            name,
+            value: Object.values(values)[index],
+            required: true
+          });
+        }
+      }))
+      const wrongFields = validateDebt(debtValues);
+      console.log(wrongFields);
     if ( wrongFields.length != null && wrongFields.length > 0) {
       let userId, debtorId;
 
       if(values.payer === "true") {
         userId = user.id;
         debtorId = values.personId;
-      } else {
+      } else { 
         userId = values.personId;
         debtorId =  user.id;
       }
