@@ -30,6 +30,7 @@ function DebtViewer (props) {
     description:props.debt.description,
     payer:"" +(props.debt.userId===props.user.id),
   });
+  const [wrongFields, setWrongFields] = React.useState([]);
   const [deleteModalOpen, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -57,7 +58,7 @@ const handleDeleteIcon = (includeDelete) => {
     </Button>
     </Grid>
     <Grid item xs={12} sm={4}>
-    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user)}>
+    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user, wrongFields)}>
     {props.settings.commitButton}
     </Button>
     </Grid>
@@ -78,7 +79,7 @@ const handleDeleteIcon = (includeDelete) => {
     </Button>
     </Grid>
     <Grid item xs={12} sm={6}>
-    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user)}>
+    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user, wrongFields)}>
     {props.settings.commitButton}
   </Button>
     </Grid>
@@ -88,22 +89,21 @@ const handleDeleteIcon = (includeDelete) => {
 } 
 
 
-  const sendDebtToServer = (values,user) => {
+  const sendDebtToServer = (values,user, wrongFields) => {
 
-    console.log(values);
-    let debtValues = [];
+    console.log(wrongFields);
+    wrongFields = [];
     Object.keys(values).forEach(
       ( (name,index) => {
-        if(Object.keys(values)[index]){
-          debtValues.push({
+        if(name && name !== "description" && name  ){
+          wrongFields.push({
             name,
-            value: Object.values(values)[index],
+            "value": Object.values(values)[index],
             required: true
           });
         }
-      }))
-      const wrongFields = validateDebt(debtValues);
-      console.log(wrongFields);
+      }));
+      setWrongFields(validateDebt(wrongFields))
     if ( wrongFields.length != null && wrongFields.length > 0) {
       let userId, debtorId;
 
@@ -127,6 +127,10 @@ const handleDeleteIcon = (includeDelete) => {
     
     if(name === "debtorIsFriend") {
       setValues({ ...values, [name]: event.target.checked  });
+   //  setWrongFields(...wrongFields.push({
+   //    "name": "person",
+   //    "error": "Necessary value",
+   //  }));
     }
     else if(name === "payed") {
       setValues({ ...values, [name]: event.target.checked  });
@@ -170,6 +174,7 @@ const handleFriendSelect = (value) => {
             value={values.person}
             onChange={handleChange('person')}
             label="Person"
+            error = {!values.debtorIsFriend && wrongFields.filter((element)=>element.name ==='person').length>0}
             fullWidth
             autoComplete="fname"
           />: <FriendSelector handler = {handleFriendSelect} initialPerson={values.personId} friends = {props.user.friends}/>}
@@ -182,6 +187,7 @@ const handleFriendSelect = (value) => {
             value={values.reason}
             onChange={handleChange('reason')}
             label="Reason"
+            error = {wrongFields.filter((element)=>element.name ==='reason').length>0}
             fullWidth
             autoComplete="reason"
           />
@@ -195,6 +201,7 @@ const handleFriendSelect = (value) => {
             name="amount"
             label="Amount"
             value={values.amount}
+            error = {wrongFields.filter((element)=>element.name ==='amount').length>0}
             onChange={handleChange('amount')}
             fullWidth
             InputProps={{
@@ -241,6 +248,7 @@ const handleFriendSelect = (value) => {
         name="date"
         aria-label="date"
         required
+        error = {wrongFields.filter((element)=>element.name ==='amount').length>0}
         inputVariant="outlined"
         value={date}
         format="HH:mm    dd/MM/yyyy"
