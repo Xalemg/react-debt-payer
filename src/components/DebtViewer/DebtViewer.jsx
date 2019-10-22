@@ -91,11 +91,11 @@ const handleDeleteIcon = (includeDelete) => {
 
   const sendDebtToServer = (values,user, wrongFields) => {
 
-    console.log(wrongFields);
     wrongFields = [];
-    Object.keys(values).forEach(
+    
+   Object.keys(values).forEach(
       ( (name,index) => {
-        if(name && name !== "description" && name  ){
+        if(name && name !== "description"  && name !=="person"  && name !=="payed"){
           wrongFields.push({
             name,
             "value": Object.values(values)[index],
@@ -103,8 +103,10 @@ const handleDeleteIcon = (includeDelete) => {
           });
         }
       }));
-      setWrongFields(validateDebt(wrongFields))
-    if ( wrongFields.length != null && wrongFields.length > 0) {
+      wrongFields=validateDebt(wrongFields);
+      setWrongFields(wrongFields);
+      console.log (wrongFields );
+    if ( wrongFields != null && !wrongFields.length > 0) {
       let userId, debtorId;
 
       if(values.payer === "true") {
@@ -174,7 +176,7 @@ const handleFriendSelect = (value) => {
             value={values.person}
             onChange={handleChange('person')}
             label="Person"
-            error = {!values.debtorIsFriend && wrongFields.filter((element)=>element.name ==='person').length>0}
+            error = {!values.debtorIsFriend && wrongFields.filter((element)=>element.field ==='person').length>0}
             fullWidth
             autoComplete="fname"
           />: <FriendSelector handler = {handleFriendSelect} initialPerson={values.personId} friends = {props.user.friends}/>}
@@ -187,7 +189,7 @@ const handleFriendSelect = (value) => {
             value={values.reason}
             onChange={handleChange('reason')}
             label="Reason"
-            error = {wrongFields.filter((element)=>element.name ==='reason').length>0}
+            error = {wrongFields.filter((element)=>element.field ==='reason').length>0}
             fullWidth
             autoComplete="reason"
           />
@@ -201,7 +203,7 @@ const handleFriendSelect = (value) => {
             name="amount"
             label="Amount"
             value={values.amount}
-            error = {wrongFields.filter((element)=>element.name ==='amount').length>0}
+            error = {wrongFields.filter((element)=>element.field ==='amount').length>0}
             onChange={handleChange('amount')}
             fullWidth
             InputProps={{
@@ -248,7 +250,7 @@ const handleFriendSelect = (value) => {
         name="date"
         aria-label="date"
         required
-        error = {wrongFields.filter((element)=>element.name ==='amount').length>0}
+        error = {wrongFields.filter((element)=>element.field ==='amount').length>0}
         inputVariant="outlined"
         value={date}
         format="HH:mm    dd/MM/yyyy"
