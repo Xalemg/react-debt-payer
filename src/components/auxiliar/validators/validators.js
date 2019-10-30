@@ -1,7 +1,7 @@
 import { EMAIL_PATTERN } from "../../Constants/constants";
 
 export const validateDebt = (fields) => {
-
+    console.log(fields);
     let wrongFields = [];
     if (fields != null && Array.isArray(fields) && fields.length > 0 ) {
         fields.forEach(field => {

@@ -95,7 +95,7 @@ const handleDeleteIcon = (includeDelete) => {
     
    Object.keys(values).forEach(
       ( (name,index) => {
-        if(name && name !== "description"  && name !=="person"  && name !=="payed"){
+        if(name && name !== "description"  && (values.debtorIsFriend && name !== "person") && ( values.debtorIsFriend && name === "personId")  && name !=="payed"){
           wrongFields.push({
             name,
             "value": Object.values(values)[index],

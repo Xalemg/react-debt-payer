@@ -40,7 +40,7 @@ function EditDebtPage(props) {
         "debtorId": props.debt.debtor_id,
         "amount": Number(props.debt.amount),
         "date": (props.debt.date),
-        "description": "",
+        "description":  props.debt.description,
         "payer": ("" + props.debt.userId!==props.user.id),
       }}
       settings = {{
