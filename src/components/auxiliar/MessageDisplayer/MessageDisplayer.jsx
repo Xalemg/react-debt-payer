@@ -9,26 +9,18 @@ const useStyles = makeStyles({
     },
 });
 
-export const MessageDisplayer = ({message, open}) => {
+export const MessageDisplayer = ({message, open, handleClose}) => {
     
     const classes = useStyles();
-
-    const [{isOpen = open}, setOpen] = React.useState(open);
+    console.log(open);
     
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
-        setOpen(false);
-      }
     return(
         <Snackbar
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',
         }}
-        open={isOpen}
+        open={open}
         autoHideDuration={6000}
         onClose={handleClose}
         ContentProps={{

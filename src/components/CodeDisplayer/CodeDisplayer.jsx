@@ -47,29 +47,10 @@ export const CodeDisplayer = ({userId}) => {
                 Your friends can share and use the same debts that you by introducing your code
         </Typography>
         <MessageDisplayer
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        ContentProps={{
-          'aria-describedby': 'message-id',
-        }}
-        message={<span id="message-id">User code copied!</span>}
-        action={[
-          <IconButton
-            key="close"
-            aria-label="close"
-            color="inherit"
-            className={classes.close}
-            onClick={handleClose}
-          >
-            <CloseIcon />
-          </IconButton>,
-        ]}
-      />
+          open={open}
+          handleClose = {handleClose}
+          message={<span id="message-id">User code copied!</span>}
+        />
         </React.Fragment>
     );
 };
