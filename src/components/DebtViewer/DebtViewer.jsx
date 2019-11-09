@@ -92,15 +92,26 @@ const handleDeleteIcon = (includeDelete) => {
   const sendDebtToServer = (values,user, wrongFields) => {
 
     wrongFields = [];
-    
+    console.log(values);
+    console.log(values.person  && !values.debtorIsFriend);
    Object.keys(values).forEach(
       ( (name,index) => {
-        if(name && name !== "description"  && (values.debtorIsFriend && name !== "person") && ( values.debtorIsFriend && name === "personId")  && name !=="payed"){
-          wrongFields.push({
-            name,
-            "value": Object.values(values)[index],
-            required: true
-          });
+        if(((name !== "description"  && name !=="payed") )){
+
+          if((name === "person" && values.debtorIsFriend !== false )|| (name === "personId" && values.debtorIsFriend !== true) ) {
+            wrongFields.push({
+              name,
+              "value": Object.values(values)[index],
+              required: false
+            });
+          } else {
+            wrongFields.push({
+              name,
+              "value": Object.values(values)[index],
+              required: true
+            });
+          }
+
         }
       }));
       wrongFields=validateDebt(wrongFields);

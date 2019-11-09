@@ -54,8 +54,8 @@ class DrawerMenu extends React.Component {
 
   handleLogOff =  () => {
     this.setState({ anchorEl: null });
-    alert('Loged off');
     this.props.logOut();
+    window.location.reload();
   } 
 
   render() {

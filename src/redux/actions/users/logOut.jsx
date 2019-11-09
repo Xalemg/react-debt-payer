@@ -3,7 +3,6 @@ import { LOGOUT, LOG_OUT_MESSAGE } from '../types';
 export const logOut =() => {
     return (dispatch) => {
       console.log("asdasdasd");
-      
        logOutSuccess();
     }
     
