@@ -1,30 +1,25 @@
+import { EMAIL_PATTERN } from "../../Constants/constants";
 
-export const validateDebt = (fields, refs) => {
-
-    //eslint-disable-next-line
-    const emailPatter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+export const validateDebt = (fields) => {
+    console.log(fields);
+    let wrongFields = [];
     if (fields != null && Array.isArray(fields) && fields.length > 0 ) {
-        let wrongfields = [];
         fields.forEach(field => {
+            
             if (field.required && (field.value == null || field.value === "")) {
-                wrongfields.push({
+                wrongFields.push({
                     field: field.name,
                     error: "Necessary value",
                 });
-            }
-            if (field.name ==="email" && emailPatter.test(field.name) ) {
-                wrongfields.push({
+            } else if(field.name === "amount" && isNaN(field.value)) {
+                wrongFields.push({
                     field: field.name,
-                    error: "Wrong email format",
+                    error: "Value must be a number"
                 });
             }
-        });
-
-        return ({
-            wrongfields,
-            isValid: false,
-        });
-    }
-    return null;
+        })};
+        return wrongFields;
+}
+export const validateEmail = (email) => {
+    return EMAIL_PATTERN.test(email);
 }

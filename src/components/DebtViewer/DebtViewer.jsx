@@ -23,15 +23,14 @@ function DebtViewer (props) {
   const [values, setValues] = React.useState({
     person: props.debt.person,
     personId: props.debt.userId === props.user.id ? props.debt.debtorId :  props.debt.userId,
-    debtorIsFriend: 
-    (props.debt.debtorId !==null && props.debt.debtorId !==undefined && props.debt.debtorId !=="") 
-    && (props.debt.userId !==null && props.debt.userId !==undefined && props.debt.userId !==""),
+    debtorIsFriend: props.debt.debtorIsFriend,
     payed:  props.debt.payed,
     reason:props.debt.reason,
     amount: props.debt.amount,
     description:props.debt.description,
     payer:"" +(props.debt.userId===props.user.id),
   });
+  const [wrongFields, setWrongFields] = React.useState([]);
   const [deleteModalOpen, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -59,7 +58,7 @@ const handleDeleteIcon = (includeDelete) => {
     </Button>
     </Grid>
     <Grid item xs={12} sm={4}>
-    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user)}>
+    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user, wrongFields)}>
     {props.settings.commitButton}
     </Button>
     </Grid>
@@ -80,7 +79,7 @@ const handleDeleteIcon = (includeDelete) => {
     </Button>
     </Grid>
     <Grid item xs={12} sm={6}>
-    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user)}>
+    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user, wrongFields)}>
     {props.settings.commitButton}
   </Button>
     </Grid>
@@ -90,16 +89,41 @@ const handleDeleteIcon = (includeDelete) => {
 } 
 
 
-  const sendDebtToServer = (values,user) => {
+  const sendDebtToServer = (values,user, wrongFields) => {
 
-    const validator = validateDebt(values);
-    if (validator.isValid) {
+    wrongFields = [];
+    console.log(values);
+    console.log(values.person  && !values.debtorIsFriend);
+   Object.keys(values).forEach(
+      ( (name,index) => {
+        if(((name !== "description"  && name !=="payed") )){
+
+          if((name === "person" && values.debtorIsFriend !== false )|| (name === "personId" && values.debtorIsFriend !== true) ) {
+            wrongFields.push({
+              name,
+              "value": Object.values(values)[index],
+              required: false
+            });
+          } else {
+            wrongFields.push({
+              name,
+              "value": Object.values(values)[index],
+              required: true
+            });
+          }
+
+        }
+      }));
+      wrongFields=validateDebt(wrongFields);
+      setWrongFields(wrongFields);
+      console.log (wrongFields );
+    if ( wrongFields != null && !wrongFields.length > 0) {
       let userId, debtorId;
 
       if(values.payer === "true") {
         userId = user.id;
         debtorId = values.personId;
-      } else {
+      } else { 
         userId = values.personId;
         debtorId =  user.id;
       }
@@ -116,6 +140,10 @@ const handleDeleteIcon = (includeDelete) => {
     
     if(name === "debtorIsFriend") {
       setValues({ ...values, [name]: event.target.checked  });
+   //  setWrongFields(...wrongFields.push({
+   //    "name": "person",
+   //    "error": "Necessary value",
+   //  }));
     }
     else if(name === "payed") {
       setValues({ ...values, [name]: event.target.checked  });
@@ -159,6 +187,7 @@ const handleFriendSelect = (value) => {
             value={values.person}
             onChange={handleChange('person')}
             label="Person"
+            error = {!values.debtorIsFriend && wrongFields.filter((element)=>element.field ==='person').length>0}
             fullWidth
             autoComplete="fname"
           />: <FriendSelector handler = {handleFriendSelect} initialPerson={values.personId} friends = {props.user.friends}/>}
@@ -171,6 +200,7 @@ const handleFriendSelect = (value) => {
             value={values.reason}
             onChange={handleChange('reason')}
             label="Reason"
+            error = {wrongFields.filter((element)=>element.field ==='reason').length>0}
             fullWidth
             autoComplete="reason"
           />
@@ -184,6 +214,7 @@ const handleFriendSelect = (value) => {
             name="amount"
             label="Amount"
             value={values.amount}
+            error = {wrongFields.filter((element)=>element.field ==='amount').length>0}
             onChange={handleChange('amount')}
             fullWidth
             InputProps={{
@@ -230,6 +261,7 @@ const handleFriendSelect = (value) => {
         name="date"
         aria-label="date"
         required
+        error = {wrongFields.filter((element)=>element.field ==='amount').length>0}
         inputVariant="outlined"
         value={date}
         format="HH:mm    dd/MM/yyyy"

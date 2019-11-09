@@ -5,6 +5,7 @@ import Title from '../Title/Title';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import{ IconButton, Snackbar }from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import {MessageDisplayer} from '../auxiliar/MessageDisplayer/MessageDisplayer';
 
 const useStyles = makeStyles({
     depositContext: {
@@ -12,10 +13,7 @@ const useStyles = makeStyles({
     },
 });
 
-
-
-
-export const CodeDisplayer = (props) => {
+export const CodeDisplayer = ({userId}) => {
 
     const classes = useStyles();
 
@@ -42,35 +40,17 @@ export const CodeDisplayer = (props) => {
         <React.Fragment>
             <Title> You user code is</Title>
             <Typography component="p" variant="h5">
-                {props.userId}          <IconButton  onClick = { () => handleCopyCode(props.userId)}><FileCopyIcon color="primary" /> </IconButton>              
+                {userId}
+                <IconButton  onClick = { () => handleCopyCode(userId)}><FileCopyIcon color="primary" /> </IconButton>              
             </Typography>
             <Typography color="textSecondary" className={classes.depositContext}>
                 Your friends can share and use the same debts that you by introducing your code
         </Typography>
-        <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        ContentProps={{
-          'aria-describedby': 'message-id',
-        }}
-        message={<span id="message-id">User code copied!</span>}
-        action={[
-          <IconButton
-            key="close"
-            aria-label="close"
-            color="inherit"
-            className={classes.close}
-            onClick={handleClose}
-          >
-            <CloseIcon />
-          </IconButton>,
-        ]}
-      />
+        <MessageDisplayer
+          open={open}
+          handleClose = {handleClose}
+          message={<span id="message-id">User code copied!</span>}
+        />
         </React.Fragment>
     );
 };

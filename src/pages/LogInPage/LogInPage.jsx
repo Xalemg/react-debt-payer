@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import {login} from '../../redux/actions/users/login'
 import useSignUpForm from '../../components/auxiliar/userLoginForm/userLoginForm';
 import { Redirect } from "react-router-dom";

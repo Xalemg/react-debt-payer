@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
- function FriendSelector ({personId, friends,initialPerson, handler}) {
+ function FriendSelector ({friends,initialPerson, handler}) {
 const person = {...friends.filter( (friend) => friend._id === initialPerson)[0]};
 console.log(person.email);
     const classes = useStyles();
