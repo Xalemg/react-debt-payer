@@ -98,7 +98,7 @@ const handleDeleteIcon = (includeDelete) => {
       ( (name,index) => {
         if(((name !== "description"  && name !=="payed") )){
 
-          if((name === "person" && values.debtorIsFriend !== false )|| (name === "personId" && values.debtorIsFriend !== true) ) {
+          if((name === "person" && values.debtorIsFriend !== false )|| (name === "personId" && values.debtorIsFriend !== true) || name === "debtorIsFriend" ) {
             wrongFields.push({
               name,
               "value": Object.values(values)[index],
@@ -190,7 +190,11 @@ const handleFriendSelect = (value) => {
             error = {!values.debtorIsFriend && wrongFields.filter((element)=>element.field ==='person').length>0}
             fullWidth
             autoComplete="fname"
-          />: <FriendSelector handler = {handleFriendSelect} initialPerson={values.personId} friends = {props.user.friends}/>}
+          />: <FriendSelector 
+          error = {values.debtorIsFriend && wrongFields.filter((element)=>element.field ==='personId').length>0}
+          handler = {handleFriendSelect} 
+          initialPerson={values.personId} 
+          friends = {props.user.friends}/>}
         </Grid> 
         <Grid item xs={12} sm={6}>
           <TextField

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
- function FriendSelector ({friends,initialPerson, handler}) {
+ function FriendSelector ({friends,initialPerson, handler, error}) {
 const person = {...friends.filter( (friend) => friend._id === initialPerson)[0]};
 console.log(person.email);
     const classes = useStyles();
@@ -42,6 +42,7 @@ console.log(person.email);
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="email-helper">Email:</InputLabel>
           <Select
+            error = {error}
             onChange={handleChange}
             value={value._id}
             inputProps={{
