@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from '../Title/Title';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
-import{ IconButton, Snackbar }from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import{ IconButton }from '@material-ui/core';
 import {MessageDisplayer} from '../auxiliar/MessageDisplayer/MessageDisplayer';
 
 const useStyles = makeStyles({
