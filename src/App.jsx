@@ -22,7 +22,7 @@ function App() {
         <Switch>
           <Route exact path = '/logIn' component ={loginPage}/>
           <Route exact path = '/signUp' component = {signUpPage}/>
-          <Route exact path = '/home' component ={home}/>
+          <Route exact path = '/home' component ={overViewPage}/>
           <DrawerMenu/>
         </Switch>
         <Switch>
@@ -32,7 +32,7 @@ function App() {
           <Route exact path = '/settings' component = {settingsPage}/>
           <Route exact path = '/debts/addDebt'  component= {AddDebtPage}/>
           <Route path = '/debts/editDebt/:debtId' component= {EditDebt}/>
-          <Route exact path = '/' component ={home}/>
+          <Route exact path = '/' component ={overViewPage}/>
         </Switch>
         </BrowserRouter>
       </div>
