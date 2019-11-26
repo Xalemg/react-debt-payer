@@ -68,7 +68,7 @@ const FriendsPage = ({user, debts, getUserInfo, listDebts, addFriend, classes}) 
                   <FriendCard email= {friend.email}
                    id = {friend._id}
                    userId = {user.id}
-                   debts={debts.filter( (debt) => debt.debtorId === friend._id || debt.userId === friend._id ? debt : null )} 
+                   debts={debts.filter( (debt) => debt.debtor_id === friend._id || debt.user_id === friend._id ? debt : null )} 
                    name= {friend.name}
                    ></FriendCard>
                    </Grid>)
