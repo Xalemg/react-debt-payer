@@ -58,7 +58,7 @@ const handleDeleteIcon = (includeDelete) => {
     </Button>
     </Grid>
     <Grid item xs={12} sm={4}>
-    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user, wrongFields)}>
+    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer(values, props.user, wrongFields)}>
     {props.settings.commitButton}
     </Button>
     </Grid>
@@ -79,7 +79,7 @@ const handleDeleteIcon = (includeDelete) => {
     </Button>
     </Grid>
     <Grid item xs={12} sm={6}>
-    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer({...values, date}, props.user, wrongFields)}>
+    <Button color="primary" variant="contained" className={classes.button} onClick ={() => sendDebtToServer(values, props.user, wrongFields)}>
     {props.settings.commitButton}
   </Button>
     </Grid>

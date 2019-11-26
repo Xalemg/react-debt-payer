@@ -79,7 +79,7 @@ function FriendCard({id, debts, name, email, userId, user, deleteFriend})  {
           </Grid>
       </CardContent>
       <CardActions disableSpacing>
-      <IconButton onClick ={() => handleDelete(user.id,userId, user.email,user.token) }>
+      <IconButton onClick ={() => handleDelete(id,userId, user.email,user.token) }>
           <DeleteIcon  />
         </IconButton>
         <IconButton
