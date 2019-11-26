@@ -144,7 +144,7 @@ class DrawerMenu extends React.Component {
             </List>
             <Divider />
             <List>
-            <Link to = '/Settings' style = {{textDecoration: "none"}}>
+            <Link to = '/Settings' style = {{textDecoration: "none", display: "none"}}>
             <ListItem button key={'Settings'} >
               <ListItemIcon><SettingsIcon/></ListItemIcon>
                 <ListItemText primary='Settings' />
@@ -180,7 +180,7 @@ const mapStateToProps = state => {
 
 const checkLogin = (user, handleCloseAuthMenu, handleLogOff) => {
   if (user.id != null) {
-    return  [ <MenuItem key="logedIn1" onClick={handleCloseAuthMenu}>Profile</MenuItem>,
+    return  [ <MenuItem key="logedIn1" onClick={handleCloseAuthMenu} style = {{display: "none"}} >Profile</MenuItem>,
     <MenuItem  key="logedIn2" onClick={ handleLogOff}>Log out</MenuItem>]
     }else {
       return (
